@@ -1,17 +1,50 @@
 import { Button } from "@/components/ui/button";
 import { Github, Mail, Phone, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 30,
+        y: (e.clientY / window.innerHeight - 0.5) * 30,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4">
-      {/* Animated background elements */}
+      {/* Animated 3D-style gradient shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-glow/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div 
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] opacity-30 animate-morph animate-rotate-slow"
+          style={{
+            background: 'radial-gradient(circle at 30% 30%, hsl(187 85% 55%) 0%, hsl(207 85% 60%) 40%, transparent 70%)',
+            filter: 'blur(80px)',
+            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+            transition: 'transform 0.3s ease-out',
+          }}
+        />
+        <div 
+          className="absolute top-1/2 right-1/4 w-[600px] h-[600px] opacity-25 animate-morph"
+          style={{
+            background: 'radial-gradient(circle at 70% 70%, hsl(207 85% 60%) 0%, hsl(187 85% 65%) 40%, transparent 70%)',
+            filter: 'blur(90px)',
+            animationDelay: '3s',
+            animationDuration: '12s',
+            transform: `translate(${-mousePosition.x * 0.5}px, ${-mousePosition.y * 0.5}px)`,
+            transition: 'transform 0.3s ease-out',
+          }}
+        />
       </div>
 
       <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
@@ -71,14 +104,21 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right side - Profile image */}
-        <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-glow rounded-full blur-2xl opacity-30 animate-glow"></div>
+        {/* Right side - Profile image with 3D effect */}
+        <div className="flex justify-center animate-scale-in" style={{ animationDelay: '0.3s' }}>
+          <div 
+            className="relative group"
+            style={{
+              transform: `perspective(1000px) rotateY(${mousePosition.x * 0.5}deg) rotateX(${-mousePosition.y * 0.5}deg)`,
+              transition: 'transform 0.1s ease-out',
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-glow to-primary rounded-full blur-3xl opacity-40 animate-glow group-hover:opacity-60 transition-opacity"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full animate-morph"></div>
             <img 
               src="https://github.com/Paul-dir.png" 
               alt="Pawlos Diriba" 
-              className="relative rounded-full w-80 h-80 md:w-96 md:h-96 object-cover border-4 border-primary/30 shadow-2xl animate-float"
+              className="relative rounded-full w-80 h-80 md:w-96 md:h-96 object-cover border-4 border-primary/40 shadow-2xl transition-all duration-300 group-hover:border-primary/60 group-hover:scale-105"
             />
           </div>
         </div>

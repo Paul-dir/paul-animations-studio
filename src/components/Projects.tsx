@@ -1,7 +1,9 @@
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Projects = () => {
+  const { elementRef, isVisible } = useScrollAnimation();
   const projects = [
     {
       title: "Task Manager",
@@ -34,9 +36,9 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-20 px-4" ref={elementRef}>
       <div className="container mx-auto">
-        <div className="text-center mb-12 animate-fade-in">
+        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Featured <span className="gradient-text">Projects</span>
           </h2>
@@ -48,14 +50,19 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className="glass-card rounded-xl overflow-hidden hover:glow-effect transition-all hover:scale-105 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`glass-card rounded-xl overflow-hidden hover:glow-effect transition-all hover:scale-105 hover:-translate-y-2 duration-500 group ${
+                isVisible ? 'animate-fade-in' : 'opacity-0'
+              }`}
+              style={{ 
+                animationDelay: `${index * 0.2}s`,
+                transitionDelay: `${index * 0.1}s`
+              }}
             >
               <div className="relative overflow-hidden h-48 bg-secondary">
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform hover:scale-110 duration-500"
+                  className="w-full h-full object-cover transition-all group-hover:scale-125 group-hover:rotate-2 duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60"></div>
               </div>

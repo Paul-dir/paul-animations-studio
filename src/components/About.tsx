@@ -1,10 +1,13 @@
 import { GraduationCap, Target, MapPin } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const About = () => {
+  const { elementRef, isVisible } = useScrollAnimation();
+
   return (
-    <section id="about" className="py-20 px-4">
+    <section id="about" className="py-20 px-4" ref={elementRef}>
       <div className="container mx-auto">
-        <div className="text-center mb-12 animate-fade-in">
+        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             About <span className="gradient-text">Me</span>
           </h2>
@@ -13,7 +16,7 @@ const About = () => {
 
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Left side - Description */}
-          <div className="space-y-6 animate-slide-in">
+          <div className={`space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
             <p className="text-lg text-muted-foreground leading-relaxed">
               I'm a passionate Software Engineering student at Haramaya University with hands-on experience in web development. I enjoy creating responsive and user-friendly websites using modern technologies like HTML, CSS, JavaScript, React, and Next.js.
             </p>
@@ -28,8 +31,8 @@ const About = () => {
           </div>
 
           {/* Right side - Info cards */}
-          <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="glass-card p-6 rounded-xl hover:glow-effect transition-all">
+          <div className={`space-y-4 transition-all duration-1000 delay-500 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
+            <div className="glass-card p-6 rounded-xl hover:glow-effect transition-all hover:scale-105 hover:-translate-y-2 duration-300">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-primary/20">
                   <GraduationCap className="h-6 w-6 text-primary" />
@@ -42,7 +45,7 @@ const About = () => {
               </div>
             </div>
 
-            <div className="glass-card p-6 rounded-xl hover:glow-effect transition-all">
+            <div className="glass-card p-6 rounded-xl hover:glow-effect transition-all hover:scale-105 hover:-translate-y-2 duration-300">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-lg bg-primary/20">
                   <Target className="h-6 w-6 text-primary" />

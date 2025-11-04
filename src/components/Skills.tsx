@@ -1,6 +1,8 @@
 import { Code2, Palette, Database, Wrench } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Skills = () => {
+  const { elementRef, isVisible } = useScrollAnimation();
   const skillCategories = [
     {
       icon: Code2,
@@ -29,7 +31,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 px-4 relative">
+    <section id="skills" className="py-20 px-4 relative" ref={elementRef}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
@@ -37,7 +39,7 @@ const Skills = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className="text-center mb-12 animate-fade-in">
+        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Skills & <span className="gradient-text">Technologies</span>
           </h2>
@@ -49,8 +51,13 @@ const Skills = () => {
           {skillCategories.map((category, index) => (
             <div
               key={category.title}
-              className="glass-card p-6 rounded-xl hover:glow-effect transition-all hover:scale-105 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`glass-card p-6 rounded-xl hover:glow-effect transition-all hover:scale-110 hover:-translate-y-3 duration-300 ${
+                isVisible ? 'animate-fade-in' : 'opacity-0'
+              }`}
+              style={{ 
+                animationDelay: `${index * 0.15}s`,
+                transitionDelay: `${index * 0.1}s`
+              }}
             >
               <div className={`inline-flex p-4 rounded-lg bg-gradient-to-br ${category.color} mb-4`}>
                 <category.icon className="h-8 w-8 text-white" />

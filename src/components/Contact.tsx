@@ -4,8 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Contact = () => {
+  const { elementRef, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,7 +50,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 relative">
+    <section id="contact" className="py-20 px-4 relative" ref={elementRef}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
@@ -56,7 +58,7 @@ const Contact = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className="text-center mb-12 animate-fade-in">
+        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h2>
@@ -66,7 +68,7 @@ const Contact = () => {
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
-          <div className="space-y-6 animate-slide-in">
+          <div className={`space-y-6 transition-all duration-1000 delay-300 ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
             <div className="glass-card p-8 rounded-xl">
               <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
               <div className="space-y-6">
@@ -95,7 +97,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
             <form onSubmit={handleSubmit} className="glass-card p-8 rounded-xl space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
