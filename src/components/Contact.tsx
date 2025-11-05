@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { elementRef, isVisible } = useScrollAnimation();
@@ -13,12 +14,31 @@ const Contact = () => {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to a backend
-    toast.success("Message sent! I'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim()
+        }
+      });
+
+      if (error) throw error;
+
+      toast.success("Message sent! I'll get back to you soon.");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again or email me directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -142,10 +162,11 @@ const Contact = () => {
 
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary-glow text-primary-foreground font-semibold py-6 text-lg glow-effect transition-all hover:scale-105"
+                disabled={isSubmitting}
+                className="w-full bg-primary hover:bg-primary-glow text-primary-foreground font-semibold py-6 text-lg glow-effect transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="mr-2 h-5 w-5" />
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </div>
