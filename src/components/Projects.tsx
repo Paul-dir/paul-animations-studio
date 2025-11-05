@@ -16,7 +16,7 @@ const Projects = () => {
       title: "Garage123",
       description: "A modern garage management system designed to streamline vehicle service tracking and customer management.",
       tech: ["React", "Firebase", "CSS"],
-      link: "https://garage123-eta.vercel.app/",
+      link: "https://garage-aid-i6gc.vercel.app/",
       image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format&fit=crop"
     },
     {
