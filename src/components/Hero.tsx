@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Github, Mail, Phone, ChevronDown } from "lucide-react";
+import { Github, Mail, Phone, ChevronDown, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -71,12 +71,71 @@ const Hero = () => {
             </Button>
             <Button 
               variant="outline"
-              className="border-2 border-primary/50 hover:border-primary text-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105"
-              asChild
+              className="border-2 border-primary/50 hover:border-primary hover:bg-primary/10 text-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105 group"
+              onClick={() => {
+                // Generate and download a simple resume
+                const resumeContent = `
+PAWLOS DIRIBA
+Software Developer
+Email: paudiriba@gmail.com | Phone: +251 941 551 883
+Location: Addis Ababa, Ethiopia
+GitHub: https://github.com/Paul-dir
+
+SUMMARY
+Passionate Software Engineering student with expertise in web development, specializing in React, Next.js, and modern JavaScript frameworks. Proven ability to create responsive, user-friendly applications with clean, maintainable code.
+
+TECHNICAL SKILLS
+Frontend: React, Next.js, HTML5, CSS3, JavaScript, TypeScript, Tailwind CSS
+Backend: Firebase, Node.js
+Tools: Git, GitHub, Vercel
+Design: Responsive Design, UI/UX Principles
+
+PROJECTS
+
+Task Manager
+- Comprehensive task management application with user-friendly interface
+- Technologies: React, Next.js, Tailwind CSS
+- Live: https://task-manager-five-psi-75.vercel.app/
+
+Garage123
+- Modern garage management system for vehicle service tracking
+- Technologies: React, Firebase, CSS
+- Live: https://garage-aid-i6gc.vercel.app/
+
+MyPortfolio
+- Personal portfolio website with clean, modern design
+- Technologies: HTML, CSS, JavaScript
+- Live: https://paul-dir.github.io/myPortfolio/
+
+Kalkidan Cup Cafe
+- Elegant cafe website with menu and online ordering
+- Technologies: HTML, CSS, JavaScript
+- Live: https://paul-dir.github.io/Kalkidan-cup-cafe/
+
+EDUCATION
+Software Engineering Student
+[Your University/Institution]
+
+CONTACT
+Portfolio: https://yourportfolio.com
+GitHub: https://github.com/Paul-dir
+Email: paudiriba@gmail.com
+Phone: +251 941 551 883
+                `.trim();
+                
+                const blob = new Blob([resumeContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'Pawlos_Diriba_Resume.txt';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+              }}
             >
-              <a href="/resume.pdf" download>
-                Download Resume
-              </a>
+              <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+              Download Resume
             </Button>
           </div>
 
