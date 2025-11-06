@@ -20,6 +20,20 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format&fit=crop"
     },
     {
+      title: "E-Commerce Platform",
+      description: "Full-featured online shopping platform with product catalog, cart management, and secure checkout process.",
+      tech: ["Next.js", "TypeScript", "Stripe"],
+      link: "https://github.com/Paul-dir",
+      image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&auto=format&fit=crop"
+    },
+    {
+      title: "Weather Dashboard",
+      description: "Real-time weather application with detailed forecasts, interactive maps, and location-based weather alerts.",
+      tech: ["React", "OpenWeather API", "Chart.js"],
+      link: "https://github.com/Paul-dir",
+      image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&auto=format&fit=crop"
+    },
+    {
       title: "MyPortfolio",
       description: "A personal portfolio website showcasing my projects and skills with a clean and modern design.",
       tech: ["HTML", "CSS", "JavaScript"],

@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { supabase } from "@/integrations/supabase/client";
+import ContactMap from "./ContactMap";
 
 const Contact = () => {
   const { elementRef, isVisible } = useScrollAnimation();
@@ -170,6 +171,11 @@ const Contact = () => {
               </Button>
             </form>
           </div>
+        </div>
+
+        {/* Map Section */}
+        <div className={`mt-12 transition-all duration-1000 delay-700 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
+          <ContactMap />
         </div>
       </div>
     </section>

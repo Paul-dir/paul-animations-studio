@@ -22,6 +22,8 @@ const Navigation = () => {
     { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
     { label: 'Skills', id: 'skills' },
+    { label: 'Experience', id: 'experience' },
+    { label: 'Services', id: 'services' },
     { label: 'Projects', id: 'projects' },
     { label: 'Contact', id: 'contact' },
   ];

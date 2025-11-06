@@ -7,25 +7,25 @@ const Skills = () => {
     {
       icon: Code2,
       title: "Frontend Development",
-      skills: ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind CSS"],
+      skills: ["HTML5", "CSS3", "JavaScript (ES6+)", "TypeScript", "React.js", "Next.js", "Tailwind CSS", "Bootstrap", "Responsive Design"],
       color: "from-primary to-primary-glow"
     },
     {
       icon: Palette,
-      title: "Design",
-      skills: ["Responsive Design", "UI/UX Principles", "Modern Layouts"],
+      title: "Design & UI/UX",
+      skills: ["Responsive Design", "UI/UX Principles", "Modern Layouts", "Figma", "Adobe XD", "Color Theory", "Typography"],
       color: "from-primary-glow to-primary"
     },
     {
       icon: Database,
       title: "Backend & Database",
-      skills: ["Firebase", "RESTful APIs", "Database Management"],
+      skills: ["Firebase", "Supabase", "RESTful APIs", "Database Design", "PostgreSQL", "Authentication", "Cloud Functions"],
       color: "from-primary to-accent"
     },
     {
       icon: Wrench,
-      title: "Tools & Others",
-      skills: ["Git", "GitHub", "VS Code", "Vercel Deployment"],
+      title: "Tools & Workflow",
+      skills: ["Git", "GitHub", "VS Code", "Vercel", "NPM/Yarn", "Chrome DevTools", "Postman", "Agile/Scrum"],
       color: "from-accent to-primary-glow"
     }
   ];

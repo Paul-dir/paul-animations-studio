@@ -18,15 +18,24 @@ const About = () => {
           {/* Left side - Description */}
           <div className={`space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a passionate Software Engineering student at Haramaya University with hands-on experience in web development. I enjoy creating responsive and user-friendly websites using modern technologies like HTML, CSS, JavaScript, React, and Next.js.
+              I'm a passionate Software Engineering student at Haramaya University with hands-on experience in web development. I specialize in creating responsive and user-friendly websites using modern technologies like HTML, CSS, JavaScript, React, and Next.js.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              My goal is to grow as a full-stack developer and contribute to impactful software projects that make a difference in people's lives.
+              With over 3 years of coding experience, I've successfully delivered multiple projects ranging from task management applications to business websites. I'm dedicated to writing clean, maintainable code and staying updated with the latest web development trends.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              My goal is to grow as a full-stack developer and contribute to impactful software projects that make a difference in people's lives. I'm particularly interested in modern JavaScript frameworks, cloud technologies, and creating seamless user experiences.
             </p>
             
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <MapPin className="h-5 w-5 text-primary" />
-              <span>Addis Ababa, Ethiopia</span>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <MapPin className="h-5 w-5 text-primary" />
+                <span>Addis Ababa, Ethiopia</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-sm">Available for Freelance</span>
+                <span className="px-3 py-1 rounded-full bg-secondary text-sm">Open to Opportunities</span>
+              </div>
             </div>
           </div>
 
