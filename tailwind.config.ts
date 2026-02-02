@@ -1,8 +1,13 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -13,9 +18,6 @@ export default {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -25,7 +27,6 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -67,31 +68,58 @@ export default {
           to: { height: "0" },
         },
         "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
         },
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(20px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+        "ping-slow": {
+          "75%, 100%": {
+            transform: "scale(1.1)",
+            opacity: "0",
+          },
         },
-        "slide-in": {
-          from: { opacity: "0", transform: "translateX(-30px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
+        "ping-slower": {
+          "75%, 100%": {
+            transform: "scale(1.2)",
+            opacity: "0",
+          },
         },
-        "glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(var(--primary) / 0.2)" },
-          "50%": { boxShadow: "0 0 40px hsl(var(--primary) / 0.4)" },
+        "gradient": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
+        "shimmer": {
+          "100%": {
+            transform: "translateX(100%)",
+          },
+        },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "float": "float 6s ease-in-out infinite",
-        "fade-in": "fade-in 1s ease-out forwards",
-        "slide-in": "slide-in 0.6s ease-out forwards",
-        "glow": "glow 3s ease-in-out infinite",
+        "float": "float 3s ease-in-out infinite",
+        "ping-slow": "ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite",
+        "ping-slower": "ping-slower 3s cubic-bezier(0, 0, 0.2, 1) infinite",
+        "gradient": "gradient 3s ease infinite",
+        "shimmer": "shimmer 2s infinite",
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
+      },
+      backgroundImage: {
+        "grid-pattern": "linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+export default config;
