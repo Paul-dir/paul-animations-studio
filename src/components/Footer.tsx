@@ -1,44 +1,28 @@
-import { Github, Mail, Phone } from "lucide-react";
+import React from 'react';
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
+export function Footer() {
   return (
-    <footer className="border-t border-border/50 py-8 px-4">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-center md:text-left">
-            <p className="text-muted-foreground">
-              © {currentYear} <span className="gradient-text font-semibold">Pawlos Diriba</span>. All rights reserved.
+    <footer className="border-t py-6 mt-12">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0">
+            <h3 className="text-lg font-bold">Paul Animations Studio</h3>
+            <p className="text-sm text-muted-foreground">
+              Professional motion graphics and 3D animations
             </p>
           </div>
-
-          <div className="flex gap-4">
-            <a 
-              href="https://github.com/Paul-dir" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-secondary hover:bg-primary/20 transition-all hover:scale-110"
-            >
-              <Github className="h-5 w-5" />
-            </a>
-            <a 
-              href="mailto:paudiriba@gmail.com"
-              className="p-2 rounded-full bg-secondary hover:bg-primary/20 transition-all hover:scale-110"
-            >
-              <Mail className="h-5 w-5" />
-            </a>
-            <a 
-              href="tel:+251941551883"
-              className="p-2 rounded-full bg-secondary hover:bg-primary/20 transition-all hover:scale-110"
-            >
-              <Phone className="h-5 w-5" />
-            </a>
+          <div className="text-center md:text-right">
+            <p className="text-sm">
+              © {new Date().getFullYear()} All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              Designed and developed by <strong>Pawlos Diriba</strong>
+            </p>
           </div>
         </div>
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;
