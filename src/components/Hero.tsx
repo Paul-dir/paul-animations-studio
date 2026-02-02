@@ -31,7 +31,7 @@ const Hero = () => {
         <div className="flex flex-col items-center text-center">
           <div className="w-48 h-48 rounded-full border-4 border-primary/50 overflow-hidden mb-8 animate-float">
             <img
-              src="/placeholder.svg"
+              src="/og-image.png"
               alt="Pawlos Diriba"
               className="w-full h-full object-cover"
             />
@@ -58,14 +58,15 @@ const Hero = () => {
               <Mail className="mr-2 h-5 w-5" />
               Get In Touch
             </Button>
-            <a
-              href="/Pawlos-Diriba-CV.pdf"
-              download
-              className="inline-flex items-center justify-center border-2 border-primary/50 hover:border-primary hover:bg-primary/10 text-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105 group rounded-md"
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-primary/50 hover:border-primary hover:bg-primary/10 text-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105 group"
+              onClick={() => window.open("/Pawlos-Diriba-CV.pdf", "_blank")}
             >
               <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              Download Resume (PDF)
-            </a>
+              Download Resume
+            </Button>
           </div>
           <div className="flex gap-6 mt-12">
             <a
