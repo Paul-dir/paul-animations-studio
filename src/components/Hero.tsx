@@ -3,189 +3,99 @@ import { Github, Mail, Phone, ChevronDown, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [typedText, setTypedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const fullText = "Transforming Ideas into Animated Reality";
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 30,
-        y: (e.clientY / window.innerHeight - 0.5) * 30,
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    if (currentIndex < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypedText(prev => prev + fullText[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 50);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex]);
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4">
-      {/* Animated 3D-style gradient shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div 
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] opacity-30 animate-morph animate-rotate-slow"
-          style={{
-            background: 'radial-gradient(circle at 30% 30%, hsl(187 85% 55%) 0%, hsl(207 85% 60%) 40%, transparent 70%)',
-            filter: 'blur(80px)',
-            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-            transition: 'transform 0.3s ease-out',
-          }}
-        />
-        <div 
-          className="absolute top-1/2 right-1/4 w-[600px] h-[600px] opacity-25 animate-morph"
-          style={{
-            background: 'radial-gradient(circle at 70% 70%, hsl(207 85% 60%) 0%, hsl(187 85% 65%) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            animationDelay: '3s',
-            animationDuration: '12s',
-            transform: `translate(${-mousePosition.x * 0.5}px, ${-mousePosition.y * 0.5}px)`,
-            transition: 'transform 0.3s ease-out',
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Left side - Text content */}
-        <div className="space-y-6 animate-fade-in">
-          <p className="text-muted-foreground text-lg">Hello, I'm</p>
-          <h1 className="text-5xl md:text-7xl font-bold">
-            <span className="gradient-text">Pawlos Diriba</span>
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5"
+    >
+      <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col items-center text-center">
+          <div className="w-48 h-48 rounded-full border-4 border-primary/50 overflow-hidden mb-8 animate-float">
+            <img
+              src="/placeholder.svg"
+              alt="Pawlos Diriba"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-4">
+            Pawlos <span className="text-primary">Diriba</span>
           </h1>
-          <h2 className="text-3xl md:text-4xl font-semibold text-foreground/90">
-            Software Developer
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-            A passionate Software Engineering student crafting responsive and user-friendly web experiences with modern technologies.
+          <div className="h-12 mb-8">
+            <p className="text-xl md:text-2xl text-muted-foreground">
+              {typedText}
+              <span className="animate-pulse">|</span>
+            </p>
+          </div>
+          <p className="text-lg text-muted-foreground max-w-2xl mb-12">
+            Passionate Software Engineering student crafting responsive and
+            user-friendly web experiences with modern technologies.
           </p>
-          
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Button 
-              onClick={() => scrollToSection('contact')}
-              className="bg-primary hover:bg-primary-glow text-primary-foreground font-semibold px-8 py-6 text-lg glow-effect transition-all hover:scale-105"
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105"
+              onClick={() => scrollToSection("contact")}
             >
               <Mail className="mr-2 h-5 w-5" />
               Get In Touch
             </Button>
-            <Button 
-              variant="outline"
-              className="border-2 border-primary/50 hover:border-primary hover:bg-primary/10 text-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105 group"
-              onClick={() => {
-                // Generate and download a simple resume
-                const resumeContent = `
-PAWLOS DIRIBA
-Software Developer
-Email: paudiriba@gmail.com | Phone: +251 941 551 883
-Location: Addis Ababa, Ethiopia
-GitHub: https://github.com/Paul-dir
-
-SUMMARY
-Passionate Software Engineering student with expertise in web development, specializing in React, Next.js, and modern JavaScript frameworks. Proven ability to create responsive, user-friendly applications with clean, maintainable code.
-
-TECHNICAL SKILLS
-Frontend: React, Next.js, HTML5, CSS3, JavaScript, TypeScript, Tailwind CSS
-Backend: Firebase, Node.js
-Tools: Git, GitHub, Vercel
-Design: Responsive Design, UI/UX Principles
-
-PROJECTS
-
-Task Manager
-- Comprehensive task management application with user-friendly interface
-- Technologies: React, Next.js, Tailwind CSS
-- Live: https://task-manager-five-psi-75.vercel.app/
-
-Garage123
-- Modern garage management system for vehicle service tracking
-- Technologies: React, Firebase, CSS
-- Live: https://garage-aid-i6gc.vercel.app/
-
-MyPortfolio
-- Personal portfolio website with clean, modern design
-- Technologies: HTML, CSS, JavaScript
-- Live: https://paul-dir.github.io/myPortfolio/
-
-Kalkidan Cup Cafe
-- Elegant cafe website with menu and online ordering
-- Technologies: HTML, CSS, JavaScript
-- Live: https://paul-dir.github.io/Kalkidan-cup-cafe/
-
-EDUCATION
-Software Engineering Student
-[Your University/Institution]
-
-CONTACT
-Portfolio: https://yourportfolio.com
-GitHub: https://github.com/Paul-dir
-Email: paudiriba@gmail.com
-Phone: +251 941 551 883
-                `.trim();
-                
-                const blob = new Blob([resumeContent], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'Pawlos_Diriba_Resume.txt';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-              }}
+            <a
+              href="/Pawlos-Diriba-CV.pdf"
+              download
+              className="inline-flex items-center justify-center border-2 border-primary/50 hover:border-primary hover:bg-primary/10 text-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105 group rounded-md"
             >
               <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              Download Resume
-            </Button>
+              Download Resume (PDF)
+            </a>
           </div>
-
-          <div className="flex gap-4 pt-4">
-            <a 
-              href="https://github.com/Paul-dir" 
-              target="_blank" 
+          <div className="flex gap-6 mt-12">
+            <a
+              href="https://github.com/Paul-dir"
+              target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary hover:bg-primary/20 transition-all hover:scale-110 glow-effect"
+              className="p-3 rounded-full border hover:border-primary hover:bg-primary/10 transition-all hover:scale-110"
             >
               <Github className="h-6 w-6" />
             </a>
-            <a 
+            <a
               href="mailto:paudiriba@gmail.com"
-              className="p-3 rounded-full bg-secondary hover:bg-primary/20 transition-all hover:scale-110 glow-effect"
+              className="p-3 rounded-full border hover:border-primary hover:bg-primary/10 transition-all hover:scale-110"
             >
               <Mail className="h-6 w-6" />
             </a>
-            <a 
+            <a
               href="tel:+251941551883"
-              className="p-3 rounded-full bg-secondary hover:bg-primary/20 transition-all hover:scale-110 glow-effect"
+              className="p-3 rounded-full border hover:border-primary hover:bg-primary/10 transition-all hover:scale-110"
             >
               <Phone className="h-6 w-6" />
             </a>
           </div>
-        </div>
-
-        {/* Right side - Profile image with 3D effect */}
-        <div className="flex justify-center animate-scale-in" style={{ animationDelay: '0.3s' }}>
-          <div 
-            className="relative group"
-            style={{
-              transform: `perspective(1000px) rotateY(${mousePosition.x * 0.5}deg) rotateX(${-mousePosition.y * 0.5}deg)`,
-              transition: 'transform 0.1s ease-out',
-            }}
+          <button
+            onClick={() => scrollToSection("about")}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-2 rounded-full border hover:border-primary hover:bg-primary/10 transition-all animate-bounce"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-glow to-primary rounded-full blur-3xl opacity-40 animate-glow group-hover:opacity-60 transition-opacity"></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full animate-morph"></div>
-            <img 
-              src="https://github.com/Paul-dir.png" 
-              alt="Pawlos Diriba" 
-              className="relative rounded-full w-80 h-80 md:w-96 md:h-96 object-cover border-4 border-primary/40 shadow-2xl transition-all duration-300 group-hover:border-primary/60 group-hover:scale-105"
-            />
-          </div>
+            <ChevronDown className="h-6 w-6" />
+          </button>
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ChevronDown className="h-8 w-8 text-primary" />
       </div>
     </section>
   );
