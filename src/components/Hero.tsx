@@ -21,6 +21,10 @@ const Hero = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const downloadCV = () => {
+    window.open("/Pawlos-Diriba-CV.pdf", "_blank");
+  };
+
   return (
     <section
       id="home"
@@ -30,11 +34,16 @@ const Hero = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center text-center">
           <div className="w-48 h-48 rounded-full border-4 border-primary/50 overflow-hidden mb-8 animate-float">
-            <img
-              src="/og-image.png"
-              alt="Pawlos Diriba"
-              className="w-full h-full object-cover"
-            />
+            <picture>
+              <source srcSet="/paul_profile.webp" type="image/webp" />
+              <source srcSet="/paul_profile.jpg" type="image/jpeg" />
+              <img
+                src="/paul_profile.jpg"
+                alt="Pawlos Diriba - Software Developer"
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
+            </picture>
           </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-4">
             Pawlos <span className="text-primary">Diriba</span>
@@ -62,7 +71,7 @@ const Hero = () => {
               size="lg"
               variant="outline"
               className="border-2 border-primary/50 hover:border-primary hover:bg-primary/10 text-foreground font-semibold px-8 py-6 text-lg transition-all hover:scale-105 group"
-              onClick={() => window.open("/Pawlos-Diriba-CV.pdf", "_blank")}
+              onClick={downloadCV}
             >
               <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
               Download Resume
