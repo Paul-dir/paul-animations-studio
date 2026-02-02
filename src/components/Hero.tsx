@@ -1,77 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Github, Mail, Phone, ChevronDown, Download, Sparkles } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { Github, Mail, Phone, ChevronDown, Download } from "lucide-react";
 
 const Hero = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [titleIndex, setTitleIndex] = useState(0);
-  const [currentTitle, setCurrentTitle] = useState("");
-  const firstNameComplete = useRef(false);
-  
-  const firstNameText = "Pawlos";
-  const lastNameText = "Diriba";
-  const titles = [
-    "Software Engineer",
-    "Full-Stack Developer", 
-    "UI/UX Designer",
-    "Animation Specialist",
-    "Tech Innovator"
-  ];
-
-  // Typewriter effect for name
-  useEffect(() => {
-    if (!firstNameComplete.current) {
-      // Type first name
-      if (firstName.length < firstNameText.length) {
-        const timeout = setTimeout(() => {
-          setFirstName(prev => prev + firstNameText[firstName.length]);
-        }, 100);
-        return () => clearTimeout(timeout);
-      } else {
-        // Start typing last name after a pause
-        const timeout = setTimeout(() => {
-          firstNameComplete.current = true;
-        }, 300);
-        return () => clearTimeout(timeout);
-      }
-    } else {
-      // Type last name
-      if (lastName.length < lastNameText.length) {
-        const timeout = setTimeout(() => {
-          setLastName(prev => prev + lastNameText[lastName.length]);
-        }, 100);
-        return () => clearTimeout(timeout);
-      }
-    }
-  }, [firstName, lastName]);
-
-  // Rotating titles effect
-  useEffect(() => {
-    if (firstNameComplete.current && lastName.length === lastNameText.length) {
-      const currentTitleText = titles[titleIndex];
-      
-      if (currentTitle.length < currentTitleText.length) {
-        const timeout = setTimeout(() => {
-          setCurrentTitle(prev => prev + currentTitleText[currentTitle.length]);
-        }, 50);
-        return () => clearTimeout(timeout);
-      } else {
-        // After showing complete title, wait and move to next
-        const timeout = setTimeout(() => {
-          if (currentTitle.length === currentTitleText.length) {
-            // Wait 2 seconds, then erase and show next title
-            setTimeout(() => {
-              setCurrentTitle("");
-              setTitleIndex((prev) => (prev + 1) % titles.length);
-            }, 2000);
-          }
-        }, 100);
-        return () => clearTimeout(timeout);
-      }
-    }
-  }, [currentTitle, titleIndex, lastName]);
-
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -85,98 +15,53 @@ const Hero = () => {
       id="home"
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800"
     >
-      {/* Animated background elements */}
+      {/* Animated background elements - kept from existing */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent"></div>
       <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500/10 rounded-full mix-blend-screen filter blur-3xl animate-pulse"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full mix-blend-screen filter blur-3xl animate-pulse delay-1000"></div>
-      
+
+      {/* Main container - using EXACT target layout */}
       <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
-          {/* Left Column: Profile Image */}
-          <div className="lg:w-2/5 relative">
-            <div className="relative mx-auto lg:mx-0">
-              {/* Glow effect */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-20 blur-xl"></div>
-              
-              {/* Profile image container */}
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl group">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 z-10"></div>
-                <img
-                  src="/paul_profile.jpg"
-                  alt="Pawlos Diriba - Professional Software Developer"
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                  loading="eager"
-                />
-                
-                {/* Animated rings */}
-                <div className="absolute inset-0 border-2 border-blue-400/30 rounded-full animate-ping-slow"></div>
-                <div className="absolute inset-4 border-2 border-purple-400/20 rounded-full animate-ping-slower"></div>
-              </div>
-              
-              {/* Floating badges */}
-              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg animate-float">
-                <Sparkles className="inline mr-2 h-4 w-4" />
-                Available for Work
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Content */}
-          <div className="lg:w-3/5 text-center lg:text-left">
-            {/* Name with typing animation */}
-            <div className="mb-6">
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-2">
-                <span className="text-white bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  {firstName}
-                  <span className="animate-pulse">|</span>
-                </span>
-                <span className="text-white ml-2">
-                  {lastName}
-                  {lastName.length === lastNameText.length ? "" : <span className="animate-pulse">|</span>}
-                </span>
-              </h1>
-              
-              {/* Rotating title */}
-              <div className="h-12 md:h-16">
-                <p className="text-xl md:text-2xl lg:text-3xl text-blue-300 font-medium">
-                  {currentTitle}
-                  <span className="animate-pulse">|</span>
-                </p>
-              </div>
+        {/* Desktop: Two-column flex layout */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+          
+          {/* LEFT COLUMN: All text content (EXACT TARGET CONTENT) */}
+          <div className="lg:w-1/2 text-center lg:text-left">
+            {/* Greeting text */}
+            <p className="text-xl md:text-2xl text-blue-400 font-medium mb-2">
+              Hello, I'm
+            </p>
+            
+            {/* Name */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4">
+              <span className="text-white">Pawlos </span>
+              <span className="text-white bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Diriba
+              </span>
+            </h1>
+            
+            {/* Role title */}
+            <div className="h-12 md:h-14 mb-6">
+              <p className="text-2xl md:text-3xl text-blue-300 font-medium">
+                Software Developer
+              </p>
             </div>
 
-            {/* Description */}
-            <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Crafting exceptional digital experiences with cutting-edge technologies. 
-              Specializing in responsive web applications, animation studios, and innovative 
-              software solutions that drive business growth.
+            {/* Description text - EXACT from target */}
+            <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              A passionate Software Engineering student crafting responsive and
+              user-friendly web experiences with modern technologies.
             </p>
 
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-6 mb-10">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">50+</div>
-                <div className="text-sm text-gray-400">Projects Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">3+</div>
-                <div className="text-sm text-gray-400">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-white">100%</div>
-                <div className="text-sm text-gray-400">Client Satisfaction</div>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
+            {/* CTA Buttons - kept existing functionality */}
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-12">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-6 text-lg transition-all hover:scale-105 shadow-lg"
                 onClick={() => scrollToSection("contact")}
               >
                 <Mail className="mr-2 h-5 w-5" />
-                Hire Me
+                Get In Touch
               </Button>
               <Button
                 size="lg"
@@ -185,11 +70,11 @@ const Hero = () => {
                 onClick={downloadCV}
               >
                 <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                Download CV
+                Download Resume
               </Button>
             </div>
 
-            {/* Social Links */}
+            {/* Social Links - kept from existing */}
             <div className="flex gap-4 justify-center lg:justify-start">
               <a
                 href="https://github.com/Paul-dir"
@@ -216,12 +101,35 @@ const Hero = () => {
               </a>
             </div>
           </div>
+
+          {/* RIGHT COLUMN: Large circular profile image */}
+          <div className="lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
+            <div className="relative">
+              {/* Glow effect */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-20 blur-xl"></div>
+              
+              {/* Profile image container - large and circular */}
+              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 z-10"></div>
+                <img
+                  src="/paul_profile.jpg"
+                  alt="Pawlos Diriba - Software Developer"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+                
+                {/* Subtle animation rings */}
+                <div className="absolute inset-0 border-2 border-blue-400/30 rounded-full animate-ping-slow"></div>
+                <div className="absolute inset-4 border-2 border-purple-400/20 rounded-full animate-ping-slower"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Scroll down indicator */}
+        {/* Scroll down indicator - kept from existing */}
         <button
           onClick={() => scrollToSection("about")}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all animate-bounce"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all animate-bounce mt-12"
           aria-label="Scroll to next section"
         >
           <ChevronDown className="h-6 w-6 text-white" />
