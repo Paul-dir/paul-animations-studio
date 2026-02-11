@@ -71,6 +71,15 @@ All colors MUST be HSL.
 
 @layer utilities {
   .gradient-text {
+    @apply bg-gradient-to-r from-primary to-[hsl(207_85%_60%)] bg-clip-text text-transparent;
+  }
+
+  .section-heading {
+    @apply text-4xl md:text-5xl font-bold mb-4;
+  }
+
+  .section-divider {
+    @apply w-20 h-1 bg-primary mx-auto rounded-full mt-4;
   }
 
   .glass-card {
