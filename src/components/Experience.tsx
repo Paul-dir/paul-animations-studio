@@ -109,15 +109,12 @@ const Experience = () => {
         <div className="max-w-4xl mx-auto">
           {enrichedExperiences.map((exp, index) => (
             <div
-              key={index}
-              className={`relative pl-8 md:pl-12 pb-12 ${
-                index !== enrichedExperiences.length - 1 ? 'border-l-2 border-primary/30' : ''
-              } ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
+  key={index}
+  className={`relative pl-8 md:pl-12 pb-12 border-l-2 border-primary/30 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
+  style={{ animationDelay: `${index * 0.2}s` }}
+>
               {/* Timeline dot */}
-              <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2" />
-
+              <div className="absolute left-0 bottom-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2 translate-y-1/2" />
               <div className="glass-card p-6 rounded-xl hover:glow-effect transition-all duration-300">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
                   <div>
