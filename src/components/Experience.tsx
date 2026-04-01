@@ -63,16 +63,17 @@ const Experience = () => {
       ]
     },
     {
-      title: "Software Engineer Intern",
+      title: "Software Development Intern",
       company: "Information Network Security Administration (INSA)",
+      location: "Ethiopia",
       startDate: "2026-02-01",
       endDate: null,
-      description: "Collaborating with senior engineers on real‑world software projects, working with Java, Python, MySQL, and web technologies.",
+      description: "Working as a software development intern, contributing to real-world projects and systems while improving skills in web development.",
       achievements: [
-        "Collaborated with senior engineers on real‑world software projects",
-        "Developed applications using Java and Python",
-        "Worked with MySQL for database design and queries",
-        "Contributed to web-based systems and participated in code reviews"
+        "Contributing to real-world projects and systems",
+        "Improving skills in web development (Frontend & Backend)",
+        "Collaborating with team members and learning industry practices",
+        "Gaining experience in problem-solving and system design"
       ],
       logo: "/insa-logo.png"
     }
