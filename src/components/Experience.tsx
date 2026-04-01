@@ -1,5 +1,7 @@
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import insaLogo from "@/assets/insa-logo.png";
+import haramayaLogo from "@/assets/haramaya-logo.png";
 
 // Helper to compute duration string from a start date to an end date (or now)
 const getDuration = (startDate: string, endDate?: string | null) => {
@@ -34,7 +36,7 @@ const Experience = () => {
         "Collaborating with team members and learning industry practices",
         "Gaining experience in problem-solving and system design"
       ],
-      logo: "/insa-logo.png"
+      logo: insaLogo
     },
     {
       title: "Freelance Web Developer",
@@ -60,7 +62,7 @@ const Experience = () => {
         "Active participation in coding projects",
         "Continuous learning of new technologies"
       ],
-      logo: "/haramaya-logo.png"
+      logo: haramayaLogo
     },
     {
       title: "Web Development Projects",
@@ -104,7 +106,6 @@ const Experience = () => {
         </div>
 
         <div className="max-w-4xl mx-auto relative">
-          {/* Continuous timeline line */}
           <div className="absolute left-[7px] md:left-[7px] top-0 bottom-0 w-0.5 bg-primary/30" />
 
           {enrichedExperiences.map((exp, index) => (
@@ -113,7 +114,6 @@ const Experience = () => {
               className={`relative pl-10 md:pl-14 pb-12 last:pb-0 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              {/* Timeline dot - at the top of each card */}
               <div className="absolute left-0 top-6 w-4 h-4 bg-primary rounded-full -translate-x-[0.5px] ring-4 ring-background z-10">
                 <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-20" />
               </div>
@@ -125,7 +125,7 @@ const Experience = () => {
                       <img
                         src={exp.logo}
                         alt={exp.company}
-                        className="h-10 w-10 rounded-lg object-contain bg-white/10 p-1 flex-shrink-0"
+                        className="h-10 w-10 rounded-lg object-contain bg-secondary/40 p-1 flex-shrink-0"
                         loading="lazy"
                         width={40}
                         height={40}
@@ -171,9 +171,7 @@ const Experience = () => {
             </div>
           ))}
 
-          {/* Bottom timeline cap dot */}
           <div className="absolute left-0 bottom-0 w-4 h-4 bg-primary/50 rounded-full -translate-x-[0.5px] ring-4 ring-background z-10" />
-          {/* Top timeline cap dot */}
           <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-[0.5px] ring-4 ring-background z-10" />
         </div>
       </div>
