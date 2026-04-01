@@ -76,10 +76,14 @@ const Experience = () => {
     }
   ];
 
+  const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
   const enrichedExperiences = experiences.map(exp => {
     const duration = getDuration(exp.startDate, exp.endDate);
-    const endLabel = exp.endDate ? null : "Present";
-    return { ...exp, duration, endLabel };
+    const startLabel = formatDate(exp.startDate);
+    const endLabel = exp.endDate ? formatDate(exp.endDate) : "Present";
+    const period = `${startLabel} – ${endLabel}`;
+    return { ...exp, duration, period };
   });
 
   return (
