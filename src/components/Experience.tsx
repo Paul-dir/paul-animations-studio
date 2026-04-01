@@ -1,13 +1,14 @@
-import { Briefcase, Calendar } from "lucide-react";
+import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-// Helper to compute duration string from a start date (YYYY-MM-DD)
-const getDuration = (startDate: string) => {
+// Helper to compute duration string from a start date to an end date (or now)
+const getDuration = (startDate: string, endDate?: string | null) => {
   const start = new Date(startDate);
-  const now = new Date();
+  const end = endDate ? new Date(endDate) : new Date();
 
-  let months = (now.getFullYear() - start.getFullYear()) * 12;
-  months += now.getMonth() - start.getMonth();
+  let months = (end.getFullYear() - start.getFullYear()) * 12;
+  months += end.getMonth() - start.getMonth();
+  if (months < 1) months = 1;
 
   if (months < 12) return `${months} ${months === 1 ? 'mo' : 'mos'}`;
   const years = Math.floor(months / 12);
@@ -16,52 +17,10 @@ const getDuration = (startDate: string) => {
   return `${years} ${years === 1 ? 'yr' : 'yrs'} ${remainingMonths} mos`;
 };
 
-// Format month-year: e.g., "Feb 2026"
-const formatMonthYear = (date: Date) => {
-  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-};
-
 const Experience = () => {
   const { elementRef, isVisible } = useScrollAnimation();
 
-  // Experience data – only one copy, with computed durations
   const experiences = [
-    {
-      title: "Freelance Web Developer",
-      company: "Self-Employed",
-      startDate: "2023-01-01",   // adjust as needed
-      endDate: null,             // null = present
-      description: "Building custom web applications for clients using React, Next.js, and modern web technologies. Delivered multiple successful projects including task management systems and business websites.",
-      achievements: [
-        "Completed 5+ client projects with 100% satisfaction",
-        "Specialized in React and Next.js applications",
-        "Implemented responsive designs and modern UI/UX"
-      ]
-    },
-    {
-      title: "Web Development Projects",
-      company: "Academic & Personal",
-      startDate: "2022-01-01",
-      endDate: "2023-12-31",
-      description: "Developed various web applications as part of academic curriculum and personal projects.",
-      achievements: [
-        "Built task manager with Firebase backend",
-        "Created garage management system",
-        "Developed multiple landing pages and portfolios"
-      ]
-    },
-    {
-      title: "Software Engineering Student",
-      company: "Haramaya University",
-      startDate: "2021-09-01",
-      endDate: null,
-      description: "Pursuing Bachelor's degree in Software Engineering with focus on full‑stack development.",
-      achievements: [
-        "4th year student with strong academic performance",
-        "Active participation in coding projects",
-        "Continuous learning of new technologies"
-      ]
-    },
     {
       title: "Software Development Intern",
       company: "Information Network Security Administration (INSA)",
@@ -76,18 +35,51 @@ const Experience = () => {
         "Gaining experience in problem-solving and system design"
       ],
       logo: "/insa-logo.png"
+    },
+    {
+      title: "Freelance Web Developer",
+      company: "Self-Employed",
+      startDate: "2023-01-01",
+      endDate: null,
+      description: "Building custom web applications for clients using React, Next.js, and modern web technologies. Delivered multiple successful projects including task management systems and business websites.",
+      achievements: [
+        "Completed 5+ client projects with 100% satisfaction",
+        "Specialized in React and Next.js applications",
+        "Implemented responsive designs and modern UI/UX"
+      ]
+    },
+    {
+      title: "Software Engineering Student",
+      company: "Haramaya University",
+      location: "Ethiopia",
+      startDate: "2021-09-01",
+      endDate: null,
+      description: "Pursuing Bachelor's degree in Software Engineering with focus on full‑stack development.",
+      achievements: [
+        "4th year student with strong academic performance",
+        "Active participation in coding projects",
+        "Continuous learning of new technologies"
+      ],
+      logo: "/haramaya-logo.png"
+    },
+    {
+      title: "Web Development Projects",
+      company: "Academic & Personal",
+      startDate: "2022-01-01",
+      endDate: "2023-12-31",
+      description: "Developed various web applications as part of academic curriculum and personal projects.",
+      achievements: [
+        "Built task manager with Firebase backend",
+        "Created garage management system",
+        "Developed multiple landing pages and portfolios"
+      ]
     }
   ];
 
-  // Build period and duration strings dynamically
   const enrichedExperiences = experiences.map(exp => {
-    const start = new Date(exp.startDate);
-    const startStr = formatMonthYear(start);
-    const end = exp.endDate ? new Date(exp.endDate) : null;
-    const endStr = end ? formatMonthYear(end) : "Present";
-    const period = `${startStr} – ${endStr}`;
-    const duration = end ? getDuration(exp.startDate) : getDuration(exp.startDate); // always compute from start to now
-    return { ...exp, period, duration };
+    const duration = getDuration(exp.startDate, exp.endDate);
+    const endLabel = exp.endDate ? null : "Present";
+    return { ...exp, duration, endLabel };
   });
 
   return (
@@ -107,32 +99,57 @@ const Experience = () => {
           <div className="w-20 h-1 bg-primary mx-auto rounded-full mt-4" />
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto relative">
+          {/* Continuous timeline line */}
+          <div className="absolute left-[7px] md:left-[7px] top-0 bottom-0 w-0.5 bg-primary/30" />
+
           {enrichedExperiences.map((exp, index) => (
             <div
-  key={index}
-  className={`relative pl-8 md:pl-12 pb-12 border-l-2 border-primary/30 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
-  style={{ animationDelay: `${index * 0.2}s` }}
->
-              {/* Timeline dot */}
-              <div className="absolute left-0 bottom-0 w-4 h-4 bg-primary rounded-full -translate-x-1/2 translate-y-1/2" />
+              key={index}
+              className={`relative pl-10 md:pl-14 pb-12 last:pb-0 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              {/* Timeline dot - at the top of each card */}
+              <div className="absolute left-0 top-6 w-4 h-4 bg-primary rounded-full -translate-x-[0.5px] ring-4 ring-background z-10">
+                <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-20" />
+              </div>
+
               <div className="glass-card p-6 rounded-xl hover:glow-effect transition-all duration-300">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
-                  <div>
-                    <h3 className="text-2xl font-semibold mb-1">{exp.title}</h3>
-                    <div className="flex items-center gap-2 text-primary">
-                      {exp.logo ? (
-                        <img src={exp.logo} alt={exp.company} className="h-5 w-5 object-contain" />
-                      ) : (
-                        <Briefcase className="h-4 w-4" />
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4 gap-3">
+                  <div className="flex items-start gap-3">
+                    {exp.logo && (
+                      <img
+                        src={exp.logo}
+                        alt={exp.company}
+                        className="h-10 w-10 rounded-lg object-contain bg-white/10 p-1 flex-shrink-0"
+                        loading="lazy"
+                        width={40}
+                        height={40}
+                      />
+                    )}
+                    <div>
+                      <h3 className="text-xl font-semibold mb-1">{exp.title}</h3>
+                      <div className="flex items-center gap-2 text-primary">
+                        {!exp.logo && <Briefcase className="h-4 w-4" />}
+                        <span className="font-medium">{exp.company}</span>
+                      </div>
+                      {exp.location && (
+                        <div className="flex items-center gap-1 text-muted-foreground text-sm mt-1">
+                          <MapPin className="h-3 w-3" />
+                          <span>{exp.location}</span>
+                        </div>
                       )}
-                      <span className="font-medium">{exp.company}</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
+
+                  <div className="flex items-center gap-2 text-muted-foreground text-sm flex-shrink-0">
                     <Calendar className="h-4 w-4" />
-                    <span>{exp.period}</span>
-                    <span className="text-xs bg-gray-800 px-2 py-0.5 rounded-full">
+                    {exp.endLabel && (
+                      <span className="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full font-medium">
+                        {exp.endLabel}
+                      </span>
+                    )}
+                    <span className="text-xs bg-secondary px-2 py-0.5 rounded-full">
                       {exp.duration}
                     </span>
                   </div>
@@ -145,7 +162,7 @@ const Experience = () => {
                 <div className="space-y-2">
                   {exp.achievements.map((achievement, idx) => (
                     <div key={idx} className="flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2" />
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
                       <p className="text-foreground/80">{achievement}</p>
                     </div>
                   ))}
@@ -153,6 +170,11 @@ const Experience = () => {
               </div>
             </div>
           ))}
+
+          {/* Bottom timeline cap dot */}
+          <div className="absolute left-0 bottom-0 w-4 h-4 bg-primary/50 rounded-full -translate-x-[0.5px] ring-4 ring-background z-10" />
+          {/* Top timeline cap dot */}
+          <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-[0.5px] ring-4 ring-background z-10" />
         </div>
       </div>
     </section>
