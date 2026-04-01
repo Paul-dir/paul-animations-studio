@@ -148,11 +148,7 @@ const Experience = () => {
 
                   <div className="flex items-center gap-2 text-muted-foreground text-sm flex-shrink-0">
                     <Calendar className="h-4 w-4" />
-                    {exp.endLabel && (
-                      <span className="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full font-medium">
-                        {exp.endLabel}
-                      </span>
-                    )}
+                    <span>{exp.period}</span>
                     <span className="text-xs bg-secondary px-2 py-0.5 rounded-full">
                       {exp.duration}
                     </span>
