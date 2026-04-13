@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import ThemeSwitcher from "./ThemeSwitcher";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +72,7 @@ const Navigation = () => {
                 )}
               </button>
             ))}
-            <ThemeSwitcher />
+            
           </div>
 
           <button
