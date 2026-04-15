@@ -32,42 +32,56 @@ const AnimatedBackground = () => {
   }, []);
 
   return (
-    <div ref={canvasRef} className="fixed inset-0 pointer-events-none overflow-hidden transition-colors duration-700 z-0">
-      {/* Large central morphing blob - the main visual element */}
+    <div ref={canvasRef} className="fixed inset-0 pointer-events-none overflow-hidden transition-colors duration-700" style={{ zIndex: 1 }}>
+      {/* Large central morphing blob */}
       <div
-        className="parallax-shape absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] animate-morph"
+        className="parallax-shape absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-morph"
         style={{
-          background: `radial-gradient(ellipse at 40% 40%, hsl(${colors.c1} / 0.45) 0%, hsl(${colors.c2} / 0.25) 40%, transparent 70%)`,
-          filter: 'blur(20px)',
+          width: '800px',
+          height: '800px',
+          background: `radial-gradient(ellipse at 40% 40%, hsl(${colors.c1} / 0.6) 0%, hsl(${colors.c2} / 0.35) 40%, transparent 70%)`,
+          filter: 'blur(40px)',
           animationDuration: '12s',
         }}
       />
       {/* Inner brighter core blob */}
       <div
-        className="parallax-shape absolute top-[35%] left-[35%] w-[450px] h-[450px] animate-morph animate-rotate-slow"
+        className="parallax-shape absolute animate-morph animate-rotate-slow"
         style={{
-          background: `radial-gradient(ellipse at 50% 50%, hsl(${colors.c1} / 0.5) 0%, hsl(${colors.c2} / 0.2) 50%, transparent 75%)`,
-          filter: 'blur(15px)',
+          top: '30%',
+          left: '30%',
+          width: '500px',
+          height: '500px',
+          background: `radial-gradient(ellipse at 50% 50%, hsl(${colors.c1} / 0.7) 0%, hsl(${colors.c2} / 0.3) 50%, transparent 75%)`,
+          filter: 'blur(30px)',
           animationDuration: '8s',
           animationDelay: '1s',
         }}
       />
       {/* Secondary offset blob */}
       <div
-        className="parallax-shape absolute top-[25%] left-[40%] w-[550px] h-[550px] animate-morph"
+        className="parallax-shape absolute animate-morph"
         style={{
-          background: `radial-gradient(ellipse at 60% 30%, hsl(${colors.c2} / 0.35) 0%, hsl(${colors.c3} / 0.15) 45%, transparent 70%)`,
-          filter: 'blur(25px)',
+          top: '20%',
+          left: '45%',
+          width: '600px',
+          height: '600px',
+          background: `radial-gradient(ellipse at 60% 30%, hsl(${colors.c2} / 0.5) 0%, hsl(${colors.c3} / 0.2) 45%, transparent 70%)`,
+          filter: 'blur(35px)',
           animationDuration: '15s',
           animationDirection: 'reverse',
         }}
       />
-      {/* Subtle bottom-right glow */}
+      {/* Bottom-right glow */}
       <div
-        className="parallax-shape absolute bottom-[10%] right-[10%] w-[400px] h-[400px] animate-morph animate-glow"
+        className="parallax-shape absolute animate-morph animate-glow"
         style={{
-          background: `radial-gradient(circle, hsl(${colors.c1} / 0.2) 0%, transparent 60%)`,
-          filter: 'blur(30px)',
+          bottom: '10%',
+          right: '10%',
+          width: '500px',
+          height: '500px',
+          background: `radial-gradient(circle, hsl(${colors.c1} / 0.4) 0%, transparent 60%)`,
+          filter: 'blur(40px)',
           animationDelay: '5s',
         }}
       />
