@@ -34,33 +34,33 @@ const AnimatedBackground = () => {
   return (
     <div ref={canvasRef} className="fixed inset-0 pointer-events-none overflow-hidden transition-colors duration-700">
       <div
-        className="parallax-shape absolute top-1/4 left-1/4 w-96 h-96 opacity-30 animate-morph animate-rotate-slow"
+        className="parallax-shape absolute top-1/4 left-1/4 w-96 h-96 opacity-50 animate-morph animate-rotate-slow"
         style={{
           background: `radial-gradient(circle, hsl(${colors.c1}) 0%, hsl(${colors.c2}) 50%, transparent 70%)`,
-          filter: 'blur(60px)',
+          filter: 'blur(50px)',
         }}
       />
       <div
-        className="parallax-shape absolute top-1/2 right-1/4 w-[30rem] h-[30rem] opacity-25 animate-morph"
+        className="parallax-shape absolute top-1/2 right-1/4 w-[30rem] h-[30rem] opacity-45 animate-morph"
         style={{
           background: `radial-gradient(circle, hsl(${colors.c2}) 0%, hsl(${colors.c3}) 50%, transparent 70%)`,
-          filter: 'blur(70px)',
+          filter: 'blur(55px)',
           animationDelay: '3s',
           animationDuration: '10s',
         }}
       />
       <div
-        className="parallax-shape absolute bottom-1/4 left-1/3 w-80 h-80 opacity-20 animate-morph animate-rotate-slow"
+        className="parallax-shape absolute bottom-1/4 left-1/3 w-80 h-80 opacity-40 animate-morph animate-rotate-slow"
         style={{
           background: `radial-gradient(circle, hsl(${colors.c3}) 0%, hsl(${colors.c2}) 50%, transparent 70%)`,
-          filter: 'blur(80px)',
+          filter: 'blur(60px)',
           animationDelay: '5s',
           animationDirection: 'reverse',
         }}
       />
-      <div className="parallax-shape absolute top-1/3 left-1/2 w-2 h-2 bg-primary rounded-full opacity-50 animate-float" />
-      <div className="parallax-shape absolute top-2/3 left-1/4 w-3 h-3 bg-primary rounded-full opacity-40 animate-float" style={{ animationDelay: '2s' }} />
-      <div className="parallax-shape absolute top-1/2 right-1/3 w-2 h-2 bg-primary rounded-full opacity-60 animate-float" style={{ animationDelay: '4s' }} />
+      <div className="parallax-shape absolute top-1/3 left-1/2 w-3 h-3 bg-primary rounded-full opacity-70 animate-float" />
+      <div className="parallax-shape absolute top-2/3 left-1/4 w-4 h-4 bg-primary rounded-full opacity-60 animate-float" style={{ animationDelay: '2s' }} />
+      <div className="parallax-shape absolute top-1/2 right-1/3 w-3 h-3 bg-primary rounded-full opacity-80 animate-float" style={{ animationDelay: '4s' }} />
     </div>
   );
 };
