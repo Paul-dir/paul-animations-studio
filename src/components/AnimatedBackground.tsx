@@ -37,25 +37,27 @@ const AnimatedBackground = () => {
       <div
         className="parallax-shape absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-morph"
         style={{
-          width: '900px',
-          height: '900px',
-          background: `radial-gradient(ellipse at 40% 40%, hsl(${colors.c1}) 0%, hsl(${colors.c2} / 0.5) 30%, transparent 65%)`,
-          opacity: 0.35,
-          filter: 'blur(60px)',
+          width: '70vw',
+          height: '70vw',
+          maxWidth: '900px',
+          maxHeight: '900px',
+          background: `radial-gradient(ellipse at 40% 40%, hsl(${colors.c1} / 0.8) 0%, hsl(${colors.c2} / 0.4) 35%, transparent 65%)`,
+          filter: 'blur(80px)',
           animationDuration: '12s',
         }}
       />
-      {/* Inner brighter core blob */}
+      {/* Inner brighter core */}
       <div
         className="parallax-shape absolute animate-morph animate-rotate-slow"
         style={{
-          top: '25%',
-          left: '25%',
-          width: '600px',
-          height: '600px',
-          background: `radial-gradient(ellipse at 50% 50%, hsl(${colors.c1}) 0%, hsl(${colors.c2} / 0.4) 40%, transparent 70%)`,
-          opacity: 0.3,
-          filter: 'blur(50px)',
+          top: '20%',
+          left: '20%',
+          width: '50vw',
+          height: '50vw',
+          maxWidth: '650px',
+          maxHeight: '650px',
+          background: `radial-gradient(ellipse at 50% 50%, hsl(${colors.c1} / 0.9) 0%, hsl(${colors.c2} / 0.4) 40%, transparent 70%)`,
+          filter: 'blur(70px)',
           animationDuration: '8s',
           animationDelay: '1s',
         }}
@@ -64,13 +66,14 @@ const AnimatedBackground = () => {
       <div
         className="parallax-shape absolute animate-morph"
         style={{
-          top: '15%',
-          left: '50%',
-          width: '700px',
-          height: '700px',
-          background: `radial-gradient(ellipse at 60% 30%, hsl(${colors.c2}) 0%, hsl(${colors.c3} / 0.3) 35%, transparent 65%)`,
-          opacity: 0.25,
-          filter: 'blur(50px)',
+          top: '10%',
+          right: '5%',
+          width: '55vw',
+          height: '55vw',
+          maxWidth: '750px',
+          maxHeight: '750px',
+          background: `radial-gradient(ellipse at 60% 30%, hsl(${colors.c2} / 0.7) 0%, hsl(${colors.c3} / 0.3) 35%, transparent 65%)`,
+          filter: 'blur(75px)',
           animationDuration: '15s',
           animationDirection: 'reverse',
         }}
@@ -79,13 +82,14 @@ const AnimatedBackground = () => {
       <div
         className="parallax-shape absolute animate-morph animate-glow"
         style={{
-          bottom: '5%',
-          right: '5%',
-          width: '600px',
-          height: '600px',
-          background: `radial-gradient(circle, hsl(${colors.c1}) 0%, transparent 55%)`,
-          opacity: 0.2,
-          filter: 'blur(50px)',
+          bottom: '0',
+          right: '0',
+          width: '50vw',
+          height: '50vw',
+          maxWidth: '600px',
+          maxHeight: '600px',
+          background: `radial-gradient(circle, hsl(${colors.c1} / 0.6) 0%, transparent 55%)`,
+          filter: 'blur(60px)',
           animationDelay: '5s',
         }}
       />
