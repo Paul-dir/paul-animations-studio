@@ -42,8 +42,8 @@ const AnimatedBackground = () => {
           width: '55vw',
           height: '75vh',
           borderRadius: '50%',
-          background: `radial-gradient(ellipse at 50% 50%, hsl(${colors.c1} / 0.25) 0%, hsl(${colors.c2} / 0.15) 50%, transparent 70%)`,
-          border: `1.5px solid hsl(${colors.c1} / 0.15)`,
+          background: 'transparent',
+          border: `2px solid hsl(${colors.c1} / 0.35)`,
           animationDuration: '25s',
         }}
       />
@@ -57,8 +57,8 @@ const AnimatedBackground = () => {
           width: '50vw',
           height: '80vh',
           borderRadius: '50%',
-          background: `radial-gradient(ellipse at 40% 40%, hsl(${colors.c2} / 0.2) 0%, hsl(${colors.c1} / 0.1) 45%, transparent 70%)`,
-          border: `1.5px solid hsl(${colors.c1} / 0.12)`,
+          background: 'transparent',
+          border: `2px solid hsl(${colors.c1} / 0.3)`,
           animationDuration: '30s',
           animationDirection: 'reverse',
           transform: 'rotate(-30deg)',
@@ -74,8 +74,8 @@ const AnimatedBackground = () => {
           width: '35vw',
           height: '50vh',
           borderRadius: '50%',
-          background: `radial-gradient(ellipse at 50% 50%, hsl(${colors.c1} / 0.35) 0%, hsl(${colors.c2} / 0.2) 40%, transparent 65%)`,
-          border: `1px solid hsl(${colors.c1} / 0.2)`,
+          background: 'transparent',
+          border: `2px solid hsl(${colors.c1} / 0.4)`,
           animationDuration: '20s',
         }}
       />
@@ -105,8 +105,8 @@ const AnimatedBackground = () => {
           maxWidth: '300px',
           maxHeight: '300px',
           borderRadius: '50%',
-          background: `radial-gradient(circle, hsl(${colors.c1} / 0.2) 0%, transparent 60%)`,
-          border: `1px solid hsl(${colors.c1} / 0.1)`,
+          background: 'transparent',
+          border: `2px solid hsl(${colors.c1} / 0.3)`,
           animationDuration: '18s',
           animationDirection: 'reverse',
         }}
