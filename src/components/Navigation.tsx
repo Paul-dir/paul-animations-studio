@@ -108,7 +108,14 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
-          </div>
+              <button
+                onClick={toggleTheme}
+                className="block w-full text-left px-5 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors flex items-center gap-2"
+              >
+                {theme === "cyan" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === "cyan" ? "Light Mode" : "Dark Mode"}
+              </button>
+            </div>
         )}
       </div>
     </nav>
