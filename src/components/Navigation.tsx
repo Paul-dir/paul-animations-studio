@@ -76,7 +76,13 @@ const Navigation = () => {
                 )}
               </button>
             ))}
-            
+            <button
+              onClick={toggleTheme}
+              className="ml-2 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-300"
+              aria-label="Toggle theme"
+            >
+              {theme === "cyan" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
           </div>
 
           <button
