@@ -172,7 +172,6 @@ const Experience = () => {
           ))}
 
           <div className="absolute left-0 bottom-0 w-4 h-4 bg-primary/50 rounded-full -translate-x-[0.5px] ring-4 ring-background z-10" />
-          <div className="absolute left-0 top-0 w-4 h-4 bg-primary rounded-full -translate-x-[0.5px] ring-4 ring-background z-10" />
         </div>
       </div>
     </section>
