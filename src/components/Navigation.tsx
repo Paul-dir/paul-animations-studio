@@ -3,9 +3,12 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const Navigation = () => {
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+
+  const toggleTheme = () => setTheme(theme === "cyan" ? "light" : "cyan");
 
   useEffect(() => {
     const handleScroll = () => {
