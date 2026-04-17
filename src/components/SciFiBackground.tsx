@@ -7,7 +7,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 // Theme-aware colors
 const themePalette = {
   cyan: { primary: "#3ECBDB", secondary: "#5AA9FF", accent: "#8B5CF6" },
-  light: { primary: "#0891B2", secondary: "#3B82F6", accent: "#A855F7" },
+  light: { primary: "#06B6D4", secondary: "#6366F1", accent: "#EC4899" },
   golden: { primary: "#E8A020", secondary: "#FF6B35", accent: "#FFD700" },
   purple: { primary: "#9B59E0", secondary: "#EC4899", accent: "#A855F7" },
 } as const;
