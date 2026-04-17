@@ -121,7 +121,7 @@ All colors MUST be HSL.
   }
 
   .glass-card {
-    @apply backdrop-blur-lg bg-card/40 border border-border/50;
+    @apply backdrop-blur-md bg-transparent border border-border/50;
   }
 
   .glow-effect {
