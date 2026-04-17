@@ -26,7 +26,7 @@ const LightAnimatedBackground = () => {
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none overflow-hidden z-0"
     >
-      {/* Large cyan blob top-left */}
+      {/* Cyan outline blob top-left */}
       <div
         className="light-blob absolute animate-float"
         style={{
@@ -37,15 +37,14 @@ const LightAnimatedBackground = () => {
           maxWidth: "800px",
           maxHeight: "800px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 30% 30%, hsl(187 85% 70% / 0.25), hsl(195 90% 75% / 0.1) 50%, transparent 75%)",
-          filter: "blur(60px)",
+          background: "transparent",
+          border: "2px solid hsl(187 85% 50% / 0.35)",
           animationDuration: "12s",
           transition: "transform 0.4s ease-out",
         }}
       />
 
-      {/* Sky blue blob top-right */}
+      {/* Sky blue outline blob top-right */}
       <div
         className="light-blob absolute animate-float"
         style={{
@@ -56,16 +55,15 @@ const LightAnimatedBackground = () => {
           maxWidth: "700px",
           maxHeight: "700px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 60% 40%, hsl(210 90% 75% / 0.22), hsl(220 85% 80% / 0.08) 55%, transparent 75%)",
-          filter: "blur(70px)",
+          background: "transparent",
+          border: "2px solid hsl(210 90% 55% / 0.3)",
           animationDuration: "15s",
           animationDelay: "2s",
           transition: "transform 0.4s ease-out",
         }}
       />
 
-      {/* Soft pink/peach blob mid-left */}
+      {/* Pink outline blob mid-left */}
       <div
         className="light-blob absolute animate-float"
         style={{
@@ -76,16 +74,15 @@ const LightAnimatedBackground = () => {
           maxWidth: "650px",
           maxHeight: "650px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 50% 50%, hsl(340 90% 80% / 0.2), hsl(20 95% 80% / 0.08) 55%, transparent 75%)",
-          filter: "blur(70px)",
+          background: "transparent",
+          border: "2px solid hsl(340 85% 60% / 0.3)",
           animationDuration: "18s",
           animationDelay: "1s",
           transition: "transform 0.4s ease-out",
         }}
       />
 
-      {/* Mint/teal blob bottom-right */}
+      {/* Mint outline blob bottom-right */}
       <div
         className="light-blob absolute animate-float"
         style={{
@@ -96,16 +93,15 @@ const LightAnimatedBackground = () => {
           maxWidth: "750px",
           maxHeight: "750px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 40% 60%, hsl(160 75% 70% / 0.22), hsl(180 80% 75% / 0.08) 55%, transparent 75%)",
-          filter: "blur(70px)",
+          background: "transparent",
+          border: "2px solid hsl(160 70% 45% / 0.3)",
           animationDuration: "14s",
           animationDelay: "3s",
           transition: "transform 0.4s ease-out",
         }}
       />
 
-      {/* Lavender blob center-bottom */}
+      {/* Lavender outline blob center-bottom */}
       <div
         className="light-blob absolute animate-float"
         style={{
@@ -116,9 +112,8 @@ const LightAnimatedBackground = () => {
           maxWidth: "600px",
           maxHeight: "600px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 50% 50%, hsl(265 85% 80% / 0.2), hsl(280 80% 85% / 0.08) 55%, transparent 75%)",
-          filter: "blur(80px)",
+          background: "transparent",
+          border: "2px solid hsl(265 75% 60% / 0.3)",
           animationDuration: "20s",
           animationDelay: "4s",
           transition: "transform 0.4s ease-out",
