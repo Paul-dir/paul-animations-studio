@@ -38,7 +38,7 @@ const LightAnimatedBackground = () => {
           maxHeight: "800px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle at 30% 30%, hsl(187 85% 70% / 0.55), hsl(195 90% 75% / 0.25) 50%, transparent 75%)",
+            "radial-gradient(circle at 30% 30%, hsl(187 85% 70% / 0.25), hsl(195 90% 75% / 0.1) 50%, transparent 75%)",
           filter: "blur(60px)",
           animationDuration: "12s",
           transition: "transform 0.4s ease-out",
@@ -57,7 +57,7 @@ const LightAnimatedBackground = () => {
           maxHeight: "700px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle at 60% 40%, hsl(210 90% 75% / 0.5), hsl(220 85% 80% / 0.2) 55%, transparent 75%)",
+            "radial-gradient(circle at 60% 40%, hsl(210 90% 75% / 0.22), hsl(220 85% 80% / 0.08) 55%, transparent 75%)",
           filter: "blur(70px)",
           animationDuration: "15s",
           animationDelay: "2s",
@@ -77,7 +77,7 @@ const LightAnimatedBackground = () => {
           maxHeight: "650px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle at 50% 50%, hsl(340 90% 80% / 0.45), hsl(20 95% 80% / 0.2) 55%, transparent 75%)",
+            "radial-gradient(circle at 50% 50%, hsl(340 90% 80% / 0.2), hsl(20 95% 80% / 0.08) 55%, transparent 75%)",
           filter: "blur(70px)",
           animationDuration: "18s",
           animationDelay: "1s",
@@ -97,7 +97,7 @@ const LightAnimatedBackground = () => {
           maxHeight: "750px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle at 40% 60%, hsl(160 75% 70% / 0.5), hsl(180 80% 75% / 0.2) 55%, transparent 75%)",
+            "radial-gradient(circle at 40% 60%, hsl(160 75% 70% / 0.22), hsl(180 80% 75% / 0.08) 55%, transparent 75%)",
           filter: "blur(70px)",
           animationDuration: "14s",
           animationDelay: "3s",
@@ -117,7 +117,7 @@ const LightAnimatedBackground = () => {
           maxHeight: "600px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle at 50% 50%, hsl(265 85% 80% / 0.45), hsl(280 80% 85% / 0.2) 55%, transparent 75%)",
+            "radial-gradient(circle at 50% 50%, hsl(265 85% 80% / 0.2), hsl(280 80% 85% / 0.08) 55%, transparent 75%)",
           filter: "blur(80px)",
           animationDuration: "20s",
           animationDelay: "4s",
