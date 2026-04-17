@@ -127,19 +127,20 @@ const Grid = ({ color }: { color: string }) => {
 const Scene = () => {
   const { theme } = useTheme();
   const palette = themePalette[theme as keyof typeof themePalette] || themePalette.cyan;
+  const isLight = theme === "light";
 
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <Particles color={palette.primary} />
-      <WireIcosahedron color={palette.primary} position={[-4, 2, -2]} />
-      <WireIcosahedron color={palette.accent} position={[5, -1, -3]} />
-      <WireTorus color={palette.secondary} position={[3, 3, -4]} />
-      <WireTorus color={palette.primary} position={[-5, -2, -1]} />
-      <GlowOrb color={palette.accent} position={[0, 0, -2]} />
-      <GlowOrb color={palette.secondary} position={[-2, 4, -5]} />
-      <GlowOrb color={palette.primary} position={[4, -3, -3]} />
-      <Grid color={palette.primary} />
+      <ambientLight intensity={isLight ? 0.8 : 0.5} />
+      <Particles color={palette.primary} opacity={isLight ? 0.9 : 0.7} size={isLight ? 0.05 : 0.04} />
+      <WireIcosahedron color={palette.primary} position={[-4, 2, -2]} opacity={isLight ? 0.75 : 0.5} />
+      <WireIcosahedron color={palette.accent} position={[5, -1, -3]} opacity={isLight ? 0.75 : 0.5} />
+      <WireTorus color={palette.secondary} position={[3, 3, -4]} opacity={isLight ? 0.7 : 0.45} />
+      <WireTorus color={palette.primary} position={[-5, -2, -1]} opacity={isLight ? 0.7 : 0.45} />
+      <GlowOrb color={palette.accent} position={[0, 0, -2]} intensity={isLight ? 1.6 : 1} />
+      <GlowOrb color={palette.secondary} position={[-2, 4, -5]} intensity={isLight ? 1.6 : 1} />
+      <GlowOrb color={palette.primary} position={[4, -3, -3]} intensity={isLight ? 1.6 : 1} />
+      <Grid color={palette.primary} opacity={isLight ? 0.35 : 0.18} />
     </>
   );
 };
