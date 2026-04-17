@@ -9,13 +9,24 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import LightAnimatedBackground from "@/components/LightAnimatedBackground";
 import CodeRain from "@/components/CodeRain";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Index = () => {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
   return (
     <div className="min-h-screen">
-      <CodeRain />
-      <AnimatedBackground />
+      {isLight ? (
+        <LightAnimatedBackground />
+      ) : (
+        <>
+          <CodeRain />
+          <AnimatedBackground />
+        </>
+      )}
       <Navigation />
       <Hero />
       <About />
