@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Github, Mail, Phone, ChevronDown, Download } from "lucide-react";
+import { Github, Mail, Phone, ChevronDown, Download, Sparkles, Star, Sparkle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
@@ -132,7 +132,27 @@ const Hero = () => {
               <div className="absolute -inset-1 rounded-full border-2 border-dashed border-primary/40 animate-rotate-slow"
                    style={{ animationDirection: "reverse", animationDuration: "30s" }}></div>
 
-              {/* Sparkles */}
+              {/* Orbiting sparkle icons */}
+              <div className="absolute inset-0 pointer-events-none animate-orbit" style={{ animationDuration: "18s" }}>
+                <Sparkles className="absolute -top-6 left-1/2 -translate-x-1/2 h-6 w-6 text-primary drop-shadow-[0_0_8px_hsl(var(--primary))] animate-twinkle" />
+              </div>
+              <div className="absolute inset-0 pointer-events-none animate-orbit" style={{ animationDuration: "22s", animationDirection: "reverse" }}>
+                <Star className="absolute top-1/2 -right-6 -translate-y-1/2 h-5 w-5 text-accent fill-accent drop-shadow-[0_0_8px_hsl(var(--accent))] animate-twinkle" style={{ animationDelay: "0.6s" }} />
+              </div>
+              <div className="absolute inset-0 pointer-events-none animate-orbit" style={{ animationDuration: "26s" }}>
+                <Sparkle className="absolute -bottom-5 left-1/2 -translate-x-1/2 h-5 w-5 text-primary-glow fill-primary-glow drop-shadow-[0_0_8px_hsl(var(--primary-glow))] animate-twinkle" style={{ animationDelay: "1.2s" }} />
+              </div>
+              <div className="absolute inset-0 pointer-events-none animate-orbit" style={{ animationDuration: "20s", animationDirection: "reverse" }}>
+                <Sparkles className="absolute top-1/2 -left-6 -translate-y-1/2 h-4 w-4 text-accent drop-shadow-[0_0_8px_hsl(var(--accent))] animate-twinkle" style={{ animationDelay: "1.8s" }} />
+              </div>
+              <div className="absolute inset-0 pointer-events-none animate-orbit" style={{ animationDuration: "30s" }}>
+                <Star className="absolute top-[10%] right-[8%] h-3 w-3 text-primary fill-primary drop-shadow-[0_0_6px_hsl(var(--primary))] animate-twinkle" style={{ animationDelay: "2.4s" }} />
+              </div>
+              <div className="absolute inset-0 pointer-events-none animate-orbit" style={{ animationDuration: "24s", animationDirection: "reverse" }}>
+                <Sparkle className="absolute bottom-[12%] left-[6%] h-4 w-4 text-accent fill-accent drop-shadow-[0_0_6px_hsl(var(--accent))] animate-twinkle" style={{ animationDelay: "0.3s" }} />
+              </div>
+
+              {/* Pulsing dot sparkles (kept) */}
               <div className="absolute top-4 -right-2 w-3 h-3 bg-primary rounded-full animate-ping opacity-75"></div>
               <div className="absolute -top-2 left-1/3 w-2 h-2 bg-accent rounded-full animate-ping opacity-60" style={{ animationDelay: "0.7s" }}></div>
               <div className="absolute bottom-6 -left-3 w-2.5 h-2.5 bg-primary-glow rounded-full animate-ping opacity-70" style={{ animationDelay: "1.4s" }}></div>
