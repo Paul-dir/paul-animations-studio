@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Github, Mail, Phone, ChevronDown, Download } from "lucide-react";
+import { Github, Mail, Phone, ChevronDown, Download, Sparkles, Star, Sparkle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Hero = () => {
