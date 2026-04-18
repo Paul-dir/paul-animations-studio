@@ -114,21 +114,39 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Profile image with animations */}
+          {/* RIGHT COLUMN: Profile image with magical animations */}
           <div className={`lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0 transition-all duration-1000 ease-out ${visible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`} style={d(300)}>
             <div className="relative animate-float">
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary to-accent rounded-full opacity-20 blur-xl animate-glow"></div>
-              
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 z-10"></div>
+              {/* Outer magical aura layers */}
+              <div className="absolute -inset-10 bg-gradient-to-r from-primary via-accent to-primary-glow rounded-full opacity-40 blur-3xl animate-glow"></div>
+              <div className="absolute -inset-6 bg-gradient-to-tr from-accent via-primary to-accent rounded-full opacity-30 blur-2xl animate-glow" style={{ animationDelay: "1s" }}></div>
+
+              {/* Rotating conic gradient ring */}
+              <div className="absolute -inset-3 rounded-full animate-rotate-slow opacity-80"
+                   style={{
+                     background: "conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary-glow)), transparent, hsl(var(--primary)))",
+                     filter: "blur(2px)"
+                   }}></div>
+
+              {/* Counter-rotating dashed ring */}
+              <div className="absolute -inset-1 rounded-full border-2 border-dashed border-primary/40 animate-rotate-slow"
+                   style={{ animationDirection: "reverse", animationDuration: "30s" }}></div>
+
+              {/* Sparkles */}
+              <div className="absolute top-4 -right-2 w-3 h-3 bg-primary rounded-full animate-ping opacity-75"></div>
+              <div className="absolute -top-2 left-1/3 w-2 h-2 bg-accent rounded-full animate-ping opacity-60" style={{ animationDelay: "0.7s" }}></div>
+              <div className="absolute bottom-6 -left-3 w-2.5 h-2.5 bg-primary-glow rounded-full animate-ping opacity-70" style={{ animationDelay: "1.4s" }}></div>
+              <div className="absolute -bottom-1 right-1/4 w-2 h-2 bg-accent rounded-full animate-ping opacity-60" style={{ animationDelay: "2.1s" }}></div>
+
+              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-4 ring-primary/30">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 z-10 mix-blend-overlay"></div>
                 <img
                   src="/paul_profile.jpg"
                   alt="Pawlos Diriba - Software Developer"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   loading="eager"
                 />
-                <div className="absolute inset-0 border-2 border-primary/30 rounded-full animate-ping-slow"></div>
-                <div className="absolute inset-4 border-2 border-accent/20 rounded-full animate-ping-slower"></div>
+                <div className="absolute inset-0 border-2 border-primary/40 rounded-full"></div>
               </div>
             </div>
           </div>
