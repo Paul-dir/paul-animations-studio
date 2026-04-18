@@ -49,7 +49,7 @@ All colors MUST be HSL.
   }
 
   [data-theme="light"] {
-    --background: 240 30% 96%;
+    --background: 245 35% 92%;
     --foreground: 250 40% 15%;
 
     --card: 250 50% 99%;
