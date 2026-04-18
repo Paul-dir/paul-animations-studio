@@ -254,6 +254,25 @@ All colors MUST be HSL.
     }
   }
 
+  .animate-orbit {
+    animation: orbit 20s linear infinite;
+    transform-origin: center center;
+  }
+
+  @keyframes orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-twinkle {
+    animation: twinkle 2.5s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.4; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
   /* 3D Perspective Utilities */
   .perspective-1000 {
     perspective: 1000px;
