@@ -197,15 +197,17 @@ const Hero = () => {
               <div className="absolute bottom-6 -left-3 w-2.5 h-2.5 bg-primary-glow rounded-full animate-ping opacity-70" style={{ animationDelay: "1.4s" }}></div>
               <div className="absolute -bottom-1 right-1/4 w-2 h-2 bg-accent rounded-full animate-ping opacity-60" style={{ animationDelay: "2.1s" }}></div>
 
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-4 ring-primary/30">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 z-10 mix-blend-overlay"></div>
+              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-4 ring-primary/30 preserve-3d" style={{ transform: "translateZ(60px)" }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 z-10 mix-blend-overlay pointer-events-none"></div>
                 <img
                   src="/paul_profile.jpg"
                   alt="Pawlos Diriba - Software Developer"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   loading="eager"
                 />
-                <div className="absolute inset-0 border-2 border-primary/40 rounded-full"></div>
+                <div className="absolute inset-0 border-2 border-primary/40 rounded-full pointer-events-none"></div>
+                {/* Specular sheen for 3D feel */}
+                <div className="absolute inset-0 rounded-full pointer-events-none mix-blend-overlay opacity-70" style={{ background: "linear-gradient(135deg, hsl(0 0% 100% / 0.35), transparent 45%, transparent 60%, hsl(0 0% 0% / 0.25))" }}></div>
               </div>
             </div>
           </div>
