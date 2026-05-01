@@ -1,13 +1,52 @@
 import { Button } from "@/components/ui/button";
 import { Github, Mail, Phone, ChevronDown, Download, Sparkles, Star, Sparkle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Hero = () => {
   const [visible, setVisible] = useState(false);
+  const tiltRef = useRef<HTMLDivElement>(null);
+  const imgWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
+  }, []);
+
+  // 3D parallax tilt: tracks mouse over the image area
+  useEffect(() => {
+    const el = tiltRef.current;
+    const inner = imgWrapRef.current;
+    if (!el || !inner) return;
+
+    let raf = 0;
+    let targetX = 0, targetY = 0;
+    let curX = 0, curY = 0;
+
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = py * -22; // rotateX
+      targetY = px * 22;  // rotateY
+    };
+
+    const onLeave = () => { targetX = 0; targetY = 0; };
+
+    const tick = () => {
+      curX += (targetX - curX) * 0.08;
+      curY += (targetY - curY) * 0.08;
+      inner.style.transform = `rotateX(${curX.toFixed(2)}deg) rotateY(${curY.toFixed(2)}deg) translateZ(0)`;
+      raf = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    raf = requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -115,8 +154,8 @@ const Hero = () => {
           </div>
 
           {/* RIGHT COLUMN: Profile image with magical animations */}
-          <div className={`lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0 transition-all duration-1000 ease-out ${visible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`} style={d(300)}>
-            <div className="relative animate-float">
+          <div ref={tiltRef} className={`lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0 perspective-1000 transition-all duration-1000 ease-out ${visible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`} style={d(300)}>
+            <div ref={imgWrapRef} className="relative animate-float preserve-3d will-change-transform">
               {/* Outer magical aura layers */}
               <div className="absolute -inset-10 bg-gradient-to-r from-primary via-accent to-primary-glow rounded-full opacity-40 blur-3xl animate-glow"></div>
               <div className="absolute -inset-6 bg-gradient-to-tr from-accent via-primary to-accent rounded-full opacity-30 blur-2xl animate-glow" style={{ animationDelay: "1s" }}></div>
@@ -158,15 +197,17 @@ const Hero = () => {
               <div className="absolute bottom-6 -left-3 w-2.5 h-2.5 bg-primary-glow rounded-full animate-ping opacity-70" style={{ animationDelay: "1.4s" }}></div>
               <div className="absolute -bottom-1 right-1/4 w-2 h-2 bg-accent rounded-full animate-ping opacity-60" style={{ animationDelay: "2.1s" }}></div>
 
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-4 ring-primary/30">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 z-10 mix-blend-overlay"></div>
+              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-background shadow-2xl ring-4 ring-primary/30 preserve-3d" style={{ transform: "translateZ(60px)" }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 z-10 mix-blend-overlay pointer-events-none"></div>
                 <img
                   src="/paul_profile.jpg"
                   alt="Pawlos Diriba - Software Developer"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   loading="eager"
                 />
-                <div className="absolute inset-0 border-2 border-primary/40 rounded-full"></div>
+                <div className="absolute inset-0 border-2 border-primary/40 rounded-full pointer-events-none"></div>
+                {/* Specular sheen for 3D feel */}
+                <div className="absolute inset-0 rounded-full pointer-events-none mix-blend-overlay opacity-70" style={{ background: "linear-gradient(135deg, hsl(0 0% 100% / 0.35), transparent 45%, transparent 60%, hsl(0 0% 0% / 0.25))" }}></div>
               </div>
             </div>
           </div>
