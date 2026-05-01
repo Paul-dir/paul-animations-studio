@@ -1,13 +1,52 @@
 import { Button } from "@/components/ui/button";
 import { Github, Mail, Phone, ChevronDown, Download, Sparkles, Star, Sparkle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Hero = () => {
   const [visible, setVisible] = useState(false);
+  const tiltRef = useRef<HTMLDivElement>(null);
+  const imgWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
     return () => clearTimeout(t);
+  }, []);
+
+  // 3D parallax tilt: tracks mouse over the image area
+  useEffect(() => {
+    const el = tiltRef.current;
+    const inner = imgWrapRef.current;
+    if (!el || !inner) return;
+
+    let raf = 0;
+    let targetX = 0, targetY = 0;
+    let curX = 0, curY = 0;
+
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = py * -22; // rotateX
+      targetY = px * 22;  // rotateY
+    };
+
+    const onLeave = () => { targetX = 0; targetY = 0; };
+
+    const tick = () => {
+      curX += (targetX - curX) * 0.08;
+      curY += (targetY - curY) * 0.08;
+      inner.style.transform = `rotateX(${curX.toFixed(2)}deg) rotateY(${curY.toFixed(2)}deg) translateZ(0)`;
+      raf = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    raf = requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
