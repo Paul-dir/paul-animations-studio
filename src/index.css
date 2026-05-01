@@ -125,6 +125,61 @@ All colors MUST be HSL.
   html {
     scroll-behavior: smooth;
   }
+
+  /* Accessibility: focus ring */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 16px;
+    z-index: 200;
+    padding: 10px 16px;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-radius: 8px;
+    font-weight: 600;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 16px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(var(--primary) / 0.6), hsl(var(--accent) / 0.6));
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--accent)));
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+
+  /* Selection */
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer utilities {
@@ -284,5 +339,59 @@ All colors MUST be HSL.
 
   .backface-hidden {
     backface-visibility: hidden;
+  }
+
+  /* Typewriter caret */
+  .caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 4px;
+    vertical-align: -2px;
+    background: hsl(var(--primary));
+    animation: caretBlink 1s steps(2, start) infinite;
+  }
+  @keyframes caretBlink {
+    to { opacity: 0; }
+  }
+
+  /* Status pulse dot */
+  .status-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: hsl(142 76% 50%);
+    box-shadow: 0 0 0 0 hsl(142 76% 50% / 0.7);
+    animation: statusPulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
+  }
+  @keyframes statusPulse {
+    70% { box-shadow: 0 0 0 10px hsl(142 76% 50% / 0); }
+    100% { box-shadow: 0 0 0 0 hsl(142 76% 50% / 0); }
+  }
+
+  /* Card shine sweep */
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 30%, hsl(0 0% 100% / 0.18) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.9s ease;
+    pointer-events: none;
+  }
+  .shine:hover::after { transform: translateX(100%); }
+
+  /* Skill bar fill */
+  .skill-fill {
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    box-shadow: 0 0 12px hsl(var(--primary) / 0.5);
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
