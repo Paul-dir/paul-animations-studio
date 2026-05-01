@@ -9,10 +9,12 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SciFiBackground from "@/components/SciFiBackground";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <ScrollProgress />
       <SciFiBackground />
       <Navigation />
       <Hero />
