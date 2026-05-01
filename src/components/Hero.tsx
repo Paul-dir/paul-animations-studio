@@ -154,8 +154,8 @@ const Hero = () => {
           </div>
 
           {/* RIGHT COLUMN: Profile image with magical animations */}
-          <div className={`lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0 transition-all duration-1000 ease-out ${visible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`} style={d(300)}>
-            <div className="relative animate-float">
+          <div ref={tiltRef} className={`lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0 perspective-1000 transition-all duration-1000 ease-out ${visible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`} style={d(300)}>
+            <div ref={imgWrapRef} className="relative animate-float preserve-3d will-change-transform">
               {/* Outer magical aura layers */}
               <div className="absolute -inset-10 bg-gradient-to-r from-primary via-accent to-primary-glow rounded-full opacity-40 blur-3xl animate-glow"></div>
               <div className="absolute -inset-6 bg-gradient-to-tr from-accent via-primary to-accent rounded-full opacity-30 blur-2xl animate-glow" style={{ animationDelay: "1s" }}></div>
