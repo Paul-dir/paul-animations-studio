@@ -115,6 +115,11 @@ const Hero = () => {
           
           {/* LEFT COLUMN */}
           <div className="lg:w-1/2 text-center lg:text-left">
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 mb-5 rounded-full glass-card text-xs md:text-sm font-medium text-foreground/90 ${anim(0)}`} style={d(50)}>
+              <span className="status-dot" aria-hidden="true" />
+              Available for new opportunities
+            </div>
+
             <p className={`text-xl md:text-2xl text-primary font-medium mb-2 ${anim(0)}`} style={d(100)}>
               Hello, I'm
             </p>
@@ -126,9 +131,10 @@ const Hero = () => {
               </span>
             </h1>
             
-            <div className={`h-12 md:h-14 mb-6 ${anim(300)}`} style={d(300)}>
-              <p className="text-2xl md:text-3xl text-primary/80 font-medium">
-                Software Developer
+            <div className={`h-12 md:h-14 mb-6 ${anim(300)}`} style={d(300)} aria-live="polite">
+              <p className="text-2xl md:text-3xl text-primary/80 font-medium font-mono tracking-tight">
+                <span>{typed}</span>
+                <span className="caret" aria-hidden="true" />
               </p>
             </div>
 
