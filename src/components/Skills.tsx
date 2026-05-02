@@ -1,5 +1,6 @@
 import { Code2, Palette, Database, Wrench } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import SkillsRadar from "@/components/SkillsRadar";
 
 type Skill = { name: string; level: number };
 type Category = {
