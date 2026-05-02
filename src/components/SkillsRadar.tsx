@@ -1,15 +1,5 @@
-import { useState, useMemo } from "react";
-
-type RadarSkill = { name: string; level: number; description: string };
-
-const radarSkills: RadarSkill[] = [
-  { name: "React", level: 92, description: "Component architecture, hooks, state management, performance optimization" },
-  { name: "TypeScript", level: 80, description: "Type-safe development, generics, utility types, strict mode" },
-  { name: "Tailwind", level: 95, description: "Utility-first styling, custom design systems, responsive layouts" },
-  { name: "Backend", level: 83, description: "Supabase, Firebase, REST APIs, authentication flows" },
-  { name: "UI/UX", level: 87, description: "Figma, responsive design, accessibility, micro-interactions" },
-  { name: "DevOps", level: 85, description: "Git workflows, Vercel deployments, CI/CD, monitoring" },
-];
+import { useState, useMemo, useCallback, useRef } from "react";
+import radarSkills from "@/data/radarSkills";
 
 const SIZE = 300;
 const CENTER = SIZE / 2;
@@ -26,7 +16,8 @@ interface Props {
 }
 
 const SkillsRadar = ({ isVisible }: Props) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const pointRefs = useRef<(SVGGElement | null)[]>([]);
   const count = radarSkills.length;
   const angleStep = 360 / count;
 
@@ -54,13 +45,35 @@ const SkillsRadar = ({ isVisible }: Props) => {
 
   const dataPath = dataPoints.map((p) => `${p.x},${p.y}`).join(" ");
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "Tab" && !e.shiftKey) {
+        if (e.key !== "Tab") e.preventDefault();
+        const next = activeIndex === null ? 0 : (activeIndex + 1) % count;
+        setActiveIndex(next);
+        pointRefs.current[next]?.focus();
+        if (e.key === "Tab") e.preventDefault();
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "Tab" && e.shiftKey) {
+        if (e.key !== "Tab") e.preventDefault();
+        const prev = activeIndex === null ? count - 1 : (activeIndex - 1 + count) % count;
+        setActiveIndex(prev);
+        pointRefs.current[prev]?.focus();
+        if (e.key === "Tab") e.preventDefault();
+      } else if (e.key === "Escape") {
+        setActiveIndex(null);
+      }
+    },
+    [activeIndex, count]
+  );
+
   return (
     <div className="flex flex-col items-center">
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         className="w-full max-w-[340px] drop-shadow-lg"
-        role="img"
-        aria-label="Skills radar chart"
+        role="group"
+        aria-label="Skills radar chart — use arrow keys to navigate"
+        onKeyDown={handleKeyDown}
       >
         {/* Grid rings */}
         {gridRings.map((points, i) => (
@@ -108,29 +121,48 @@ const SkillsRadar = ({ isVisible }: Props) => {
         {radarSkills.map((skill, i) => {
           const pt = dataPoints[i];
           const labelPt = polarToXY(i * angleStep, MAX_RADIUS + 20);
-          const isHovered = hoveredIndex === i;
+          const isActive = activeIndex === i;
 
           return (
             <g
               key={skill.name}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="cursor-pointer"
+              ref={(el) => { pointRefs.current[i] = el; }}
+              tabIndex={0}
+              role="button"
+              aria-label={`${skill.name}: ${skill.level}% — ${skill.description}`}
+              onMouseEnter={() => setActiveIndex(i)}
+              onMouseLeave={() => setActiveIndex(null)}
+              onFocus={() => setActiveIndex(i)}
+              onBlur={() => setActiveIndex(null)}
+              className="cursor-pointer outline-none"
             >
               {/* Hit area */}
               <circle cx={pt.x} cy={pt.y} r="14" fill="transparent" />
+
+              {/* Focus ring */}
+              {isActive && (
+                <circle
+                  cx={pt.x}
+                  cy={pt.y}
+                  r="10"
+                  fill="none"
+                  stroke="hsl(var(--primary) / 0.4)"
+                  strokeWidth="1.5"
+                  className="animate-pulse"
+                />
+              )}
 
               {/* Dot */}
               <circle
                 cx={pt.x}
                 cy={pt.y}
-                r={isHovered ? 6 : 4}
+                r={isActive ? 6 : 4}
                 fill="hsl(var(--primary))"
                 className="transition-all duration-300"
                 style={{
                   opacity: isVisible ? 1 : 0,
                   transitionDelay: `${i * 100 + 400}ms`,
-                  filter: isHovered ? "drop-shadow(0 0 6px hsl(var(--primary)))" : "none",
+                  filter: isActive ? "drop-shadow(0 0 6px hsl(var(--primary)))" : "none",
                 }}
               />
 
@@ -140,7 +172,7 @@ const SkillsRadar = ({ isVisible }: Props) => {
                 y={labelPt.y}
                 textAnchor="middle"
                 dominantBaseline="central"
-                className="fill-foreground/80 text-[10px] font-medium select-none"
+                className="fill-foreground/80 text-[10px] font-medium select-none pointer-events-none"
                 style={{
                   opacity: isVisible ? 1 : 0,
                   transition: "opacity 0.5s ease",
@@ -159,16 +191,16 @@ const SkillsRadar = ({ isVisible }: Props) => {
         className="mt-4 h-16 flex items-center justify-center transition-all duration-300"
         aria-live="polite"
       >
-        {hoveredIndex !== null ? (
+        {activeIndex !== null ? (
           <div className="glass-card px-5 py-3 rounded-xl text-center animate-fade-in max-w-xs">
             <div className="flex items-center justify-center gap-2 mb-1">
-              <span className="font-semibold text-sm">{radarSkills[hoveredIndex].name}</span>
-              <span className="text-xs font-mono text-primary">{radarSkills[hoveredIndex].level}%</span>
+              <span className="font-semibold text-sm">{radarSkills[activeIndex].name}</span>
+              <span className="text-xs font-mono text-primary">{radarSkills[activeIndex].level}%</span>
             </div>
-            <p className="text-xs text-muted-foreground">{radarSkills[hoveredIndex].description}</p>
+            <p className="text-xs text-muted-foreground">{radarSkills[activeIndex].description}</p>
           </div>
         ) : (
-          <p className="text-xs text-muted-foreground/60 italic">Hover a point to see details</p>
+          <p className="text-xs text-muted-foreground/60 italic">Hover or press arrow keys to explore</p>
         )}
       </div>
     </div>
