@@ -1,5 +1,6 @@
 import { Code2, Palette, Database, Wrench } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import SkillsRadar from "@/components/SkillsRadar";
 
 type Skill = { name: string; level: number };
 type Category = {
@@ -73,6 +74,12 @@ const Skills = () => {
           </h2>
           <p className="text-muted-foreground text-lg">Tools, frameworks, and craft I bring to every project</p>
           <div className="section-divider"></div>
+        </div>
+
+        {/* Radar Chart */}
+        <div className={`max-w-md mx-auto mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+             style={{ transitionDelay: '200ms' }}>
+          <SkillsRadar isVisible={isVisible} />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
