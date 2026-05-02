@@ -101,8 +101,22 @@ All colors MUST be HSL.
     min-height: 100vh;
     transition: background 0.5s ease, color 0.5s ease;
     position: relative;
-    font-weight: 500;
+    font-weight: 400;
   }
+
+  /* Typography hierarchy */
+  h1, h2, h3, h4 {
+    font-weight: 700;
+  }
+  h5, h6 {
+    font-weight: 600;
+  }
+  p, span, a, li, td, th, label, input, textarea, select, button {
+    font-weight: 450;
+  }
+  .font-bold { font-weight: 700 !important; }
+  .font-semibold { font-weight: 600 !important; }
+  .font-medium { font-weight: 500 !important; }
 
   /* Subtle grain overlay (default = dark themes: light blend) */
   body::before {
