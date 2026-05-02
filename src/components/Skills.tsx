@@ -76,6 +76,12 @@ const Skills = () => {
           <div className="section-divider"></div>
         </div>
 
+        {/* Radar Chart */}
+        <div className={`max-w-md mx-auto mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+             style={{ transitionDelay: '200ms' }}>
+          <SkillsRadar isVisible={isVisible} />
+        </div>
+
         <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {skillCategories.map((category, index) => (
             <div
