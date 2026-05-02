@@ -133,22 +133,6 @@ All colors MUST be HSL.
     border-radius: 6px;
   }
 
-  /* Skip link */
-  .skip-link {
-    position: fixed;
-    top: -100px;
-    left: 16px;
-    z-index: 200;
-    padding: 10px 16px;
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-    border-radius: 8px;
-    font-weight: 600;
-    transition: top 0.2s ease;
-  }
-  .skip-link:focus {
-    top: 16px;
-  }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar { width: 10px; height: 10px; }
