@@ -1,7 +1,7 @@
 import { ExternalLink, Github, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Project = {
   title: string;
@@ -73,7 +73,6 @@ const CATEGORIES = ["All", "Web App", "Full Stack", "Frontend"] as const;
 type Category = (typeof CATEGORIES)[number];
 
 const Projects = () => {
-  const { elementRef, isVisible } = useScrollAnimation();
   const [filter, setFilter] = useState<Category>("All");
 
   const filtered = useMemo(
@@ -82,138 +81,158 @@ const Projects = () => {
   );
 
   return (
-    <section id="projects" className="py-24 px-4 relative" ref={elementRef}>
+    <section id="projects" className="py-24 px-4 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute top-1/4 left-0 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="section-heading">
             Featured <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-muted-foreground text-lg">A selection of recent work — filter by category</p>
-          <div className="section-divider"></div>
-        </div>
+          <div className="section-divider" />
+        </motion.div>
 
         {/* Filter chips */}
-        <div
+        <motion.div
           role="tablist"
           aria-label="Project category filter"
-          className={`flex flex-wrap justify-center gap-2 mb-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          className="flex flex-wrap justify-center gap-2 mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           {CATEGORIES.map((cat) => {
             const active = filter === cat;
             return (
-              <button
+              <motion.button
                 key={cat}
                 role="tab"
                 aria-selected={active}
                 onClick={() => setFilter(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300
                   ${active
-                    ? "bg-primary text-primary-foreground border-primary shadow-[0_0_20px_hsl(var(--primary)/0.4)] scale-105"
+                    ? "bg-primary text-primary-foreground border-primary shadow-[0_0_20px_hsl(var(--primary)/0.4)]"
                     : "bg-card/30 border-border/60 text-foreground/80 hover:border-primary/60 hover:text-primary hover:bg-primary/5"
                   }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {cat}
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-14">
-          {filtered.map((project, index) => (
-            <article
-              key={project.title}
-              className={`glass-card shine rounded-2xl overflow-hidden hover:glow-effect transition-all hover:scale-[1.02] hover:-translate-y-2 duration-500 group ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-              style={{ transitionDelay: `${index * 80}ms`, transitionDuration: "700ms" }}
-            >
-              <div className="relative overflow-hidden h-48 bg-secondary">
-                <img
-                  src={project.image}
-                  alt={`${project.title} preview`}
-                  className="w-full h-full object-cover transition-all duration-[1200ms] group-hover:scale-110"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent opacity-90" />
+        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-14">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <motion.article
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+                className="glass-card shine rounded-2xl overflow-hidden group"
+                whileHover={{ scale: 1.02, y: -8 }}
+              >
+                <div className="relative overflow-hidden h-48 bg-secondary">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-cover transition-all duration-[1200ms] group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent opacity-90" />
 
-                {/* Category badge */}
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background/80 backdrop-blur-md text-[11px] font-semibold tracking-wide text-foreground border border-border/50">
-                  {project.category}
-                </span>
-
-                {/* Featured */}
-                {project.featured && (
-                  <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-primary/90 text-primary-foreground text-[11px] font-semibold backdrop-blur-md">
-                    <Star className="h-3 w-3 fill-current" />
-                    Featured
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background/80 backdrop-blur-md text-[11px] font-semibold tracking-wide text-foreground border border-border/50">
+                    {project.category}
                   </span>
-                )}
 
-                {/* Hover overlay quick action */}
-                <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
-                  >
-                    Live Preview <ExternalLink className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">{project.description}</p>
-
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 rounded-md bg-primary/15 text-primary text-xs font-medium border border-primary/20"
-                    >
-                      {tech}
+                  {project.featured && (
+                    <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-primary/90 text-primary-foreground text-[11px] font-semibold backdrop-blur-md">
+                      <Star className="h-3 w-3 fill-current" />
+                      Featured
                     </span>
-                  ))}
+                  )}
+
+                  <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                    >
+                      Live Preview <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </div>
                 </div>
 
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 border-border hover:border-primary hover:bg-primary/10 group/btn"
-                    asChild
-                  >
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} live`}>
-                      Live
-                      <ExternalLink className="ml-2 h-3.5 w-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </a>
-                  </Button>
-                  {project.repo && (
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">{project.description}</p>
+
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 rounded-md bg-primary/15 text-primary text-xs font-medium border border-primary/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-2">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-border hover:border-primary hover:bg-primary/10"
+                      className="flex-1 border-border hover:border-primary hover:bg-primary/10 group/btn"
                       asChild
                     >
-                      <a href={project.repo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} source code`}>
-                        <Github className="h-4 w-4" />
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} live`}>
+                        Live
+                        <ExternalLink className="ml-2 h-3.5 w-3.5 group-hover/btn:translate-x-1 transition-transform" />
                       </a>
                     </Button>
-                  )}
+                    {project.repo && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-border hover:border-primary hover:bg-primary/10"
+                        asChild
+                      >
+                        <a href={project.repo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} source code`}>
+                          <Github className="h-4 w-4" />
+                        </a>
+                      </Button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
-        <div className={`text-center transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <Button
             variant="outline"
             className="border-2 border-primary/40 hover:border-primary hover:bg-primary/10 px-8 py-6 text-lg group"
@@ -225,7 +244,7 @@ const Projects = () => {
               <ExternalLink className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </a>
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
