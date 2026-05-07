@@ -100,7 +100,7 @@ const Hero = () => {
   const fadeUp = (delay: number) => ({
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] },
+    transition: { duration: 0.7, delay, ease: [0.25, 0.46, 0.45, 0.94] as const },
   });
 
   return (
