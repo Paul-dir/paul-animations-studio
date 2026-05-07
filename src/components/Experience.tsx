@@ -1,17 +1,14 @@
 import { Briefcase, Calendar, MapPin } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 import insaLogo from "@/assets/insa-logo.png";
 import haramayaLogo from "@/assets/haramaya-logo.png";
 
-// Helper to compute duration string from a start date to an end date (or now)
 const getDuration = (startDate: string, endDate?: string | null) => {
   const start = new Date(startDate);
   const end = endDate ? new Date(endDate) : new Date();
-
   let months = (end.getFullYear() - start.getFullYear()) * 12;
   months += end.getMonth() - start.getMonth();
   if (months < 1) months = 1;
-
   if (months < 12) return `${months} ${months === 1 ? 'mo' : 'mos'}`;
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
@@ -19,83 +16,86 @@ const getDuration = (startDate: string, endDate?: string | null) => {
   return `${years} ${years === 1 ? 'yr' : 'yrs'} ${remainingMonths} mos`;
 };
 
+const experiences = [
+  {
+    title: "Software Development Intern",
+    company: "Information Network Security Administration (INSA)",
+    location: "Ethiopia",
+    startDate: "2026-02-01",
+    endDate: null,
+    description: "Working as a software development intern, contributing to real-world projects and systems while improving skills in web development.",
+    achievements: [
+      "Contributing to real-world projects and systems",
+      "Improving skills in web development (Frontend & Backend)",
+      "Collaborating with team members and learning industry practices",
+      "Gaining experience in problem-solving and system design"
+    ],
+    logo: insaLogo
+  },
+  {
+    title: "Freelance Web Developer",
+    company: "Self-Employed",
+    startDate: "2023-01-01",
+    endDate: null,
+    description: "Building custom web applications for clients using React, Next.js, and modern web technologies.",
+    achievements: [
+      "Completed 5+ client projects with 100% satisfaction",
+      "Specialized in React and Next.js applications",
+      "Implemented responsive designs and modern UI/UX"
+    ]
+  },
+  {
+    title: "Software Engineering Student",
+    company: "Haramaya University",
+    location: "Ethiopia",
+    startDate: "2021-09-01",
+    endDate: null,
+    description: "Pursuing Bachelor's degree in Software Engineering with focus on full‑stack development.",
+    achievements: [
+      "4th year student with strong academic performance",
+      "Active participation in coding projects",
+      "Continuous learning of new technologies"
+    ],
+    logo: haramayaLogo
+  },
+  {
+    title: "Web Development Projects",
+    company: "Academic & Personal",
+    startDate: "2022-01-01",
+    endDate: "2023-12-31",
+    description: "Developed various web applications as part of academic curriculum and personal projects.",
+    achievements: [
+      "Built task manager with Firebase backend",
+      "Created garage management system",
+      "Developed multiple landing pages and portfolios"
+    ]
+  }
+];
+
+const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+
 const Experience = () => {
-  const { elementRef, isVisible } = useScrollAnimation();
-
-  const experiences = [
-    {
-      title: "Software Development Intern",
-      company: "Information Network Security Administration (INSA)",
-      location: "Ethiopia",
-      startDate: "2026-02-01",
-      endDate: null,
-      description: "Working as a software development intern, contributing to real-world projects and systems while improving skills in web development.",
-      achievements: [
-        "Contributing to real-world projects and systems",
-        "Improving skills in web development (Frontend & Backend)",
-        "Collaborating with team members and learning industry practices",
-        "Gaining experience in problem-solving and system design"
-      ],
-      logo: insaLogo
-    },
-    {
-      title: "Freelance Web Developer",
-      company: "Self-Employed",
-      startDate: "2023-01-01",
-      endDate: null,
-      description: "Building custom web applications for clients using React, Next.js, and modern web technologies. Delivered multiple successful projects including task management systems and business websites.",
-      achievements: [
-        "Completed 5+ client projects with 100% satisfaction",
-        "Specialized in React and Next.js applications",
-        "Implemented responsive designs and modern UI/UX"
-      ]
-    },
-    {
-      title: "Software Engineering Student",
-      company: "Haramaya University",
-      location: "Ethiopia",
-      startDate: "2021-09-01",
-      endDate: null,
-      description: "Pursuing Bachelor's degree in Software Engineering with focus on full‑stack development.",
-      achievements: [
-        "4th year student with strong academic performance",
-        "Active participation in coding projects",
-        "Continuous learning of new technologies"
-      ],
-      logo: haramayaLogo
-    },
-    {
-      title: "Web Development Projects",
-      company: "Academic & Personal",
-      startDate: "2022-01-01",
-      endDate: "2023-12-31",
-      description: "Developed various web applications as part of academic curriculum and personal projects.",
-      achievements: [
-        "Built task manager with Firebase backend",
-        "Created garage management system",
-        "Developed multiple landing pages and portfolios"
-      ]
-    }
-  ];
-
-  const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-
-  const enrichedExperiences = experiences.map(exp => {
+  const enriched = experiences.map(exp => {
     const duration = getDuration(exp.startDate, exp.endDate);
     const startLabel = formatDate(exp.startDate);
     const endLabel = exp.endDate ? formatDate(exp.endDate) : "Present";
-    const period = `${startLabel} – ${endLabel}`;
-    return { ...exp, duration, period };
+    return { ...exp, duration, period: `${startLabel} – ${endLabel}` };
   });
 
   return (
-    <section id="experience" className="py-20 px-4 relative" ref={elementRef}>
+    <section id="experience" className="py-20 px-4 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Experience & <span className="gradient-text">Journey</span>
           </h2>
@@ -103,22 +103,34 @@ const Experience = () => {
             My professional journey and educational background in software development.
           </p>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full mt-4" />
-        </div>
+        </motion.div>
 
         <div className="max-w-4xl mx-auto relative">
           <div className="absolute left-[7px] md:left-[7px] top-0 bottom-0 w-0.5 bg-primary/30" />
 
-          {enrichedExperiences.map((exp, index) => (
-            <div
+          {enriched.map((exp, index) => (
+            <motion.div
               key={index}
-              className={`relative pl-10 md:pl-14 pb-12 last:pb-0 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}
-              style={{ animationDelay: `${index * 0.2}s` }}
+              className="relative pl-10 md:pl-14 pb-12 last:pb-0"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] as const }}
             >
-              <div className="absolute left-0 top-6 w-4 h-4 bg-primary rounded-full -translate-x-[0.5px] ring-4 ring-background z-10">
+              <motion.div
+                className="absolute left-0 top-6 w-4 h-4 bg-primary rounded-full -translate-x-[0.5px] ring-4 ring-background z-10"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.15 + 0.2 }}
+              >
                 <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-20" />
-              </div>
+              </motion.div>
 
-              <div className="glass-card p-6 rounded-xl hover:glow-effect transition-all duration-300">
+              <motion.div
+                className="glass-card p-6 rounded-xl transition-all duration-300"
+                whileHover={{ y: -4, boxShadow: "0 0 30px hsl(var(--primary) / 0.15)" }}
+              >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4 gap-3">
                   <div className="flex items-start gap-3">
                     {exp.logo && (
@@ -149,15 +161,11 @@ const Experience = () => {
                   <div className="flex items-center gap-2 text-muted-foreground text-sm flex-shrink-0">
                     <Calendar className="h-4 w-4" />
                     <span>{exp.period}</span>
-                    <span className="text-xs bg-secondary px-2 py-0.5 rounded-full">
-                      {exp.duration}
-                    </span>
+                    <span className="text-xs bg-secondary px-2 py-0.5 rounded-full">{exp.duration}</span>
                   </div>
                 </div>
 
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {exp.description}
-                </p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
 
                 <div className="space-y-2">
                   {exp.achievements.map((achievement, idx) => (
@@ -167,8 +175,8 @@ const Experience = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
 
           <div className="absolute left-0 bottom-0 w-4 h-4 bg-primary/50 rounded-full -translate-x-[0.5px] ring-4 ring-background z-10" />
