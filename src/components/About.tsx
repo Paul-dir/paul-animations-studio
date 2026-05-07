@@ -1,26 +1,46 @@
 import { GraduationCap, Target, MapPin, Sparkles } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.15, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  }),
+};
 
 const About = () => {
-  const { elementRef, isVisible } = useScrollAnimation();
-
   return (
-    <section id="about" className="py-24 px-4 relative" ref={elementRef}>
+    <section id="about" className="py-24 px-4 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="section-heading">
+        <motion.div
+          className="text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          <motion.h2 variants={fadeUp} custom={0} className="section-heading">
             About <span className="gradient-text">Me</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">Get to know me and what drives my passion for development</p>
-          <div className="section-divider"></div>
-        </div>
+          </motion.h2>
+          <motion.p variants={fadeUp} custom={1} className="text-muted-foreground text-lg max-w-xl mx-auto">
+            Get to know me and what drives my passion for development
+          </motion.p>
+          <motion.div variants={fadeUp} custom={2} className="section-divider" />
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-          <div className={`space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+          >
             <p className="text-lg text-muted-foreground leading-relaxed">
               I'm a passionate Software Engineering student at Haramaya University with hands-on experience in web development. I specialize in creating responsive and user-friendly websites using modern technologies like HTML, CSS, JavaScript, React, and Next.js.
             </p>
@@ -43,35 +63,38 @@ const About = () => {
                 <span className="px-4 py-1.5 rounded-full bg-secondary text-sm font-medium border border-border/50">Open to Opportunities</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className={`space-y-5 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
-            <div className="glass-card p-7 rounded-2xl hover:glow-effect transition-all hover:scale-[1.03] hover:-translate-y-2 duration-300 group">
-              <div className="flex items-start gap-5">
-                <div className="p-3.5 rounded-xl bg-primary/15 group-hover:bg-primary/25 transition-colors">
-                  <GraduationCap className="h-7 w-7 text-primary" />
+          <motion.div
+            className="space-y-5"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+          >
+            {[
+              { icon: GraduationCap, title: "Education", sub: "4th Year Software Engineering Student", org: "Haramaya University" },
+              { icon: Target, title: "Focus", sub: "Web Development & Full-Stack Engineering", org: "Building impactful software solutions" },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                variants={fadeUp}
+                custom={i + 2}
+                className="glass-card p-7 rounded-2xl hover:glow-effect transition-all hover:scale-[1.03] hover:-translate-y-2 duration-300 group"
+                whileHover={{ y: -4 }}
+              >
+                <div className="flex items-start gap-5">
+                  <div className="p-3.5 rounded-xl bg-primary/15 group-hover:bg-primary/25 transition-colors">
+                    <item.icon className="h-7 w-7 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-1.5">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.sub}</p>
+                    <p className="text-foreground/80 font-medium mt-0.5">{item.org}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-1.5">Education</h3>
-                  <p className="text-muted-foreground">4th Year Software Engineering Student</p>
-                  <p className="text-foreground/80 font-medium mt-0.5">Haramaya University</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card p-7 rounded-2xl hover:glow-effect transition-all hover:scale-[1.03] hover:-translate-y-2 duration-300 group">
-              <div className="flex items-start gap-5">
-                <div className="p-3.5 rounded-xl bg-primary/15 group-hover:bg-primary/25 transition-colors">
-                  <Target className="h-7 w-7 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-1.5">Focus</h3>
-                  <p className="text-muted-foreground">Web Development & Full-Stack Engineering</p>
-                  <p className="text-foreground/80 font-medium mt-0.5">Building impactful software solutions</p>
-                </div>
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
