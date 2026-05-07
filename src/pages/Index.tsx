@@ -10,10 +10,12 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SciFiBackground from "@/components/SciFiBackground";
 import ScrollProgress from "@/components/ScrollProgress";
+import CursorFollower from "@/components/CursorFollower";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <CursorFollower />
       <ScrollProgress />
       <SciFiBackground />
       <Navigation />
