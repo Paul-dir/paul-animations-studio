@@ -16,21 +16,19 @@ const Stats = () => {
 
   useEffect(() => {
     if (!isInView) return;
-    stats.forEach((stat, index) => {
-      let start = 0;
-      const end = stat.value;
-      const duration = 2000;
-      const increment = end / (duration / 16);
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCounters((prev) => { const n = [...prev]; n[index] = end; return n; });
-          clearInterval(timer);
-        } else {
-          setCounters((prev) => { const n = [...prev]; n[index] = Math.floor(start); return n; });
-        }
-      }, 16);
-    });
+    const duration = 2000;
+    const start = performance.now();
+    const targets = stats.map((s) => s.value);
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setCounters(targets.map((v) => Math.floor(v * eased)));
+      if (t < 1) raf = requestAnimationFrame(tick);
+      else setCounters(targets);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [isInView]);
 
   return (
