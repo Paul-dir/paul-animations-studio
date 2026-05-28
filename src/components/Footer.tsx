@@ -14,7 +14,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative border-t border-border/30 bg-transparent backdrop-blur-sm">
+    <footer className="relative border-t border-border/30 bg-transparent">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-3 gap-8 items-start">
           <motion.div
