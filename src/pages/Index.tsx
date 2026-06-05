@@ -4,16 +4,27 @@ import Hero from "@/components/Hero";
 import SciFiBackground from "@/components/SciFiBackground";
 import ScrollProgress from "@/components/ScrollProgress";
 import CursorFollower from "@/components/CursorFollower";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-// Lazy-load below-the-fold sections to keep initial paint fast on mobile
-const About = lazy(() => import("@/components/About"));
-const Stats = lazy(() => import("@/components/Stats"));
-const Skills = lazy(() => import("@/components/Skills"));
-const Experience = lazy(() => import("@/components/Experience"));
-const Services = lazy(() => import("@/components/Services"));
-const Projects = lazy(() => import("@/components/Projects"));
-const Contact = lazy(() => import("@/components/Contact"));
-const Footer = lazy(() => import("@/components/Footer"));
+// Eager imports for desktop (preserves previous behavior)
+import About from "@/components/About";
+import Stats from "@/components/Stats";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
+import Services from "@/components/Services";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+
+// Lazy versions used only on small screens
+const AboutLazy = lazy(() => import("@/components/About"));
+const StatsLazy = lazy(() => import("@/components/Stats"));
+const SkillsLazy = lazy(() => import("@/components/Skills"));
+const ExperienceLazy = lazy(() => import("@/components/Experience"));
+const ServicesLazy = lazy(() => import("@/components/Services"));
+const ProjectsLazy = lazy(() => import("@/components/Projects"));
+const ContactLazy = lazy(() => import("@/components/Contact"));
+const FooterLazy = lazy(() => import("@/components/Footer"));
 
 const SectionFallback = () => (
   <div className="py-24 px-4">
@@ -22,6 +33,8 @@ const SectionFallback = () => (
 );
 
 const Index = () => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="min-h-screen">
       <CursorFollower />
@@ -29,16 +42,29 @@ const Index = () => {
       <SciFiBackground />
       <Navigation />
       <Hero />
-      <Suspense fallback={<SectionFallback />}>
-        <About />
-        <Stats />
-        <Skills />
-        <Experience />
-        <Services />
-        <Projects />
-        <Contact />
-        <Footer />
-      </Suspense>
+      {isMobile ? (
+        <Suspense fallback={<SectionFallback />}>
+          <AboutLazy />
+          <StatsLazy />
+          <SkillsLazy />
+          <ExperienceLazy />
+          <ServicesLazy />
+          <ProjectsLazy />
+          <ContactLazy />
+          <FooterLazy />
+        </Suspense>
+      ) : (
+        <>
+          <About />
+          <Stats />
+          <Skills />
+          <Experience />
+          <Services />
+          <Projects />
+          <Contact />
+          <Footer />
+        </>
+      )}
     </div>
   );
 };
