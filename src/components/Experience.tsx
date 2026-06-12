@@ -2,6 +2,7 @@ import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import insaLogo from "@/assets/insa-logo.png";
 import haramayaLogo from "@/assets/haramaya-logo.png";
+import atlasLogo from "@/assets/atlas-logo.png.asset.json";
 
 const getDuration = (startDate: string, endDate?: string | null) => {
   const start = new Date(startDate);
@@ -31,6 +32,21 @@ const experiences = [
       "Gaining experience in problem-solving and system design"
     ],
     logo: insaLogo
+  },
+  {
+    title: "Software Development Intern",
+    company: "Atlas Computer Technology",
+    location: "Ethiopia",
+    startDate: "2026-02-01",
+    endDate: null,
+    description: "Interning at Atlas Computer Technology, contributing to product development and gaining hands-on experience with modern software solutions and IT services.",
+    achievements: [
+      "Contributing to product development and client solutions",
+      "Working with modern web and software technologies",
+      "Collaborating with cross-functional engineering teams",
+      "Strengthening practical skills in real-world IT environments"
+    ],
+    logo: atlasLogo.url
   },
   {
     title: "Freelance Web Developer",
