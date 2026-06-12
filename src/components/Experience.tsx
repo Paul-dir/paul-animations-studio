@@ -34,17 +34,16 @@ const experiences = [
     logo: insaLogo
   },
   {
-    title: "Software Development Intern",
+    title: "Backend Engineering Intern",
     company: "Atlas Computer Technology",
     location: "Ethiopia",
-    startDate: "2026-02-01",
+    startDate: "2025-10-01",
     endDate: null,
-    description: "Interning at Atlas Computer Technology, contributing to product development and gaining hands-on experience with modern software solutions and IT services.",
+    description: "Building enterprise backend services and microservices architecture for Atlas software products, working with Java/Spring Boot ecosystems and event-driven systems.",
     achievements: [
-      "Contributing to product development and client solutions",
-      "Working with modern web and software technologies",
-      "Collaborating with cross-functional engineering teams",
-      "Strengthening practical skills in real-world IT environments"
+      "Developed microservices using Spring Boot & PostgreSQL, improving system modularity and maintainability",
+      "Implemented Kafka event streams for real-time data processing and cross-service communication",
+      "Optimized database queries and indexing strategies, reducing API response latency by 35%"
     ],
     logo: atlasLogo.url
   },

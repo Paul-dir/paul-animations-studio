@@ -40,9 +40,12 @@ const Skills = () => {
       icon: Database,
       title: "Backend & Database",
       skills: [
+        { name: "Spring Boot", level: 78 },
+        { name: "PostgreSQL", level: 80 },
+        { name: "Apache Kafka", level: 72 },
+        { name: "Docker", level: 75 },
         { name: "Supabase", level: 85 },
         { name: "Firebase", level: 80 },
-        { name: "PostgreSQL", level: 75 },
         { name: "RESTful APIs", level: 85 },
         { name: "Authentication", level: 82 },
       ],
