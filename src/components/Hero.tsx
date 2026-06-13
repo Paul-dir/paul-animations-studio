@@ -97,6 +97,10 @@ const Hero = () => {
     window.open("/Pawlos-Diriba-CV.pdf", "_blank");
   };
 
+  const downloadModernResume = () => {
+    window.open("/Pawlos-Diriba-Resume-Modern.pdf", "_blank");
+  };
+
   const fadeUp = (delay: number) => ({
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
