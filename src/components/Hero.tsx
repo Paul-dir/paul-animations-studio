@@ -97,6 +97,10 @@ const Hero = () => {
     window.open("/Pawlos-Diriba-CV.pdf", "_blank");
   };
 
+  const downloadModernResume = () => {
+    window.open("/Pawlos-Diriba-Resume-Modern.pdf", "_blank");
+  };
+
   const fadeUp = (delay: number) => ({
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
@@ -185,7 +189,19 @@ const Hero = () => {
                   data-magnetic
                 >
                   <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                  Download Resume
+                  Download CV
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-primary/60 hover:border-primary hover:bg-primary/10 text-foreground font-semibold px-8 py-6 text-lg group backdrop-blur-sm"
+                  onClick={downloadModernResume}
+                  data-magnetic
+                >
+                  <Sparkles className="mr-2 h-5 w-5 text-primary group-hover:animate-pulse" />
+                  Modern Resume
                 </Button>
               </motion.div>
             </motion.div>
