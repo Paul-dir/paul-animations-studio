@@ -9,9 +9,10 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useTheme } from "@/contexts/ThemeContext";
 import { toast } from "@/hooks/use-toast";
+import { downloadFile } from "@/lib/utils";
 import {
   Home, User, Code, Briefcase, Wrench, FolderGit2, Mail,
   Download, Sparkles, Sun, Moon, Github, Phone, Copy, ExternalLink,
@@ -83,6 +84,10 @@ const CommandPalette = () => {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="p-0 overflow-hidden max-w-xl border-primary/30 bg-background/95 backdrop-blur-2xl">
+          <DialogTitle className="sr-only">Quick navigation command palette</DialogTitle>
+          <DialogDescription className="sr-only">
+            Search portfolio sections, downloads, contact actions, links, and appearance settings.
+          </DialogDescription>
           <Command className="bg-transparent">
             <CommandInput placeholder="Type a command or search..." />
             <CommandList className="max-h-[400px]">
@@ -100,12 +105,12 @@ const CommandPalette = () => {
               <CommandSeparator />
 
               <CommandGroup heading="Downloads">
-                <CommandItem onSelect={() => run(() => window.open("/Pawlos-Diriba-CV.pdf", "_blank"))}>
+                <CommandItem onSelect={() => run(() => void downloadFile("/Pawlos-Diriba-CV.pdf", "Pawlos-Diriba-CV.pdf"))}>
                   <Download className="mr-2 h-4 w-4 text-primary" />
                   <span>Download CV</span>
                   <CommandShortcut>PDF</CommandShortcut>
                 </CommandItem>
-                <CommandItem onSelect={() => run(() => window.open("/Pawlos-Diriba-Resume-Modern.pdf", "_blank"))}>
+                <CommandItem onSelect={() => run(() => void downloadFile("/Pawlos-Diriba-Resume-Modern.pdf", "Pawlos-Diriba-Resume-Modern.pdf"))}>
                   <Sparkles className="mr-2 h-4 w-4 text-primary" />
                   <span>Download Modern Resume</span>
                   <CommandShortcut>PDF</CommandShortcut>
