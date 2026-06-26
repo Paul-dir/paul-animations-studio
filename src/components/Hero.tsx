@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Github, Mail, Phone, ChevronDown, Download, Sparkles, Star, Sparkle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { downloadFile } from "@/lib/utils";
 
 const ROLES = [
   "Software Developer",
@@ -94,11 +95,11 @@ const Hero = () => {
   };
 
   const downloadCV = () => {
-    window.open("/Pawlos-Diriba-CV.pdf", "_blank");
+    void downloadFile("/Pawlos-Diriba-CV.pdf", "Pawlos-Diriba-CV.pdf");
   };
 
   const downloadModernResume = () => {
-    window.open("/Pawlos-Diriba-Resume-Modern.pdf", "_blank");
+    void downloadFile("/Pawlos-Diriba-Resume-Modern.pdf", "Pawlos-Diriba-Resume-Modern.pdf");
   };
 
   const fadeUp = (delay: number) => ({
