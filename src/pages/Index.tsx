@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import SciFiBackground from "@/components/SciFiBackground";
 import ScrollProgress from "@/components/ScrollProgress";
 import CursorFollower from "@/components/CursorFollower";
+import CommandPalette from "@/components/CommandPalette";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Eager imports for desktop (preserves previous behavior)
@@ -38,6 +39,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <CursorFollower />
+      <CommandPalette />
       <ScrollProgress />
       <SciFiBackground />
       <Navigation />
