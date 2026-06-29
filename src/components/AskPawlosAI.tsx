@@ -344,7 +344,6 @@ const AskPawlosAI = () => {
                 </div>
               )}
             </div>
-          </ScrollArea>
 
           {/* Composer */}
           <div className="border-t border-border/50 p-3 flex gap-2">
