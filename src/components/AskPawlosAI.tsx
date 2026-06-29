@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Bot, MessageSquarePlus, Send, Sparkles, Trash2, X, User } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -292,8 +292,7 @@ const AskPawlosAI = () => {
           )}
 
           {/* Messages */}
-          <ScrollArea className="flex-1" viewportRef={scrollRef as any}>
-            <div ref={scrollRef} className="px-4 py-4 space-y-4 overflow-y-auto h-full">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
               {messages.length === 0 && !pendingAssistant && (
                 <div className="text-center py-10 space-y-3">
                   <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/15 border border-primary/40">
