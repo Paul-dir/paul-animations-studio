@@ -2,3 +2,6 @@ project_id = "vxrfekmmqklizdbvgbnp"
 
 [functions.send-contact-email]
 verify_jwt = false
+
+[functions.chat-with-pawlos]
+verify_jwt = false
