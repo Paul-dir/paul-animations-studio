@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { Menu, X, Sun, Moon, Sparkles, Palette } from "lucide-react";
+import { useTheme, THEME_ORDER, THEME_META, ThemeName } from "@/contexts/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
@@ -13,13 +13,25 @@ const navItems = [
   { label: "Contact", id: "contact" },
 ];
 
+const themeIcon: Record<ThemeName, typeof Sun> = {
+  cyan: Moon,
+  light: Sun,
+  purple: Sparkles,
+  golden: Palette,
+};
+
 const Navigation = () => {
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
 
-  const toggleTheme = () => setTheme(theme === "cyan" ? "light" : "cyan");
+  const cycleTheme = () => {
+    const idx = THEME_ORDER.indexOf(theme);
+    setTheme(THEME_ORDER[(idx + 1) % THEME_ORDER.length]);
+  };
+
 
   useEffect(() => {
     const handleScroll = () => {
