@@ -10,13 +10,21 @@ import {
   CommandShortcut,
 } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme, THEME_ORDER, THEME_META, ThemeName } from "@/contexts/ThemeContext";
 import { toast } from "@/hooks/use-toast";
 import { downloadFile } from "@/lib/utils";
 import {
   Home, User, Code, Briefcase, Wrench, FolderGit2, Mail,
-  Download, Sparkles, Sun, Moon, Github, Phone, Copy, ExternalLink,
+  Download, Sparkles, Sun, Moon, Github, Phone, Copy, ExternalLink, Palette,
 } from "lucide-react";
+
+const themeIcon: Record<ThemeName, typeof Sun> = {
+  cyan: Moon,
+  light: Sun,
+  purple: Sparkles,
+  golden: Palette,
+};
+
 
 const sections = [
   { id: "home", label: "Home", icon: Home },
@@ -147,15 +155,27 @@ const CommandPalette = () => {
               <CommandSeparator />
 
               <CommandGroup heading="Appearance">
-                <CommandItem onSelect={() => run(() => setTheme(theme === "cyan" ? "light" : "cyan"))}>
-                  {theme === "cyan" ? (
-                    <Sun className="mr-2 h-4 w-4 text-primary" />
-                  ) : (
-                    <Moon className="mr-2 h-4 w-4 text-primary" />
-                  )}
-                  <span>Switch to {theme === "cyan" ? "Light" : "Dark"} theme</span>
-                </CommandItem>
+                {THEME_ORDER.filter((t) => t !== theme).map((t) => {
+                  const Icon = themeIcon[t];
+                  return (
+                    <CommandItem key={t} onSelect={() => run(() => setTheme(t))}>
+                      <Icon className="mr-2 h-4 w-4 text-primary" />
+                      <span>Switch to {THEME_META[t].label}</span>
+                      <CommandShortcut className="text-[10px]">{THEME_META[t].tagline}</CommandShortcut>
+                    </CommandItem>
+                  );
+                })}
               </CommandGroup>
+            </CommandList>
+          </Command>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
+export default CommandPalette;
+
             </CommandList>
           </Command>
         </DialogContent>

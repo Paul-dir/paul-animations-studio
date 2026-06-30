@@ -97,15 +97,56 @@ const Navigation = () => {
                 )}
               </button>
             ))}
-            <motion.button
-              onClick={toggleTheme}
-              className="ml-2 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-300"
-              aria-label="Toggle theme"
-              whileHover={{ rotate: 180 }}
-              transition={{ duration: 0.4 }}
-            >
-              {theme === "cyan" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </motion.button>
+            <div className="relative ml-2">
+              <motion.button
+                onClick={cycleTheme}
+                onContextMenu={(e) => { e.preventDefault(); setThemeMenuOpen((o) => !o); }}
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-300 flex items-center gap-1.5"
+                aria-label={`Theme: ${THEME_META[theme].label}. Click to cycle, right-click for menu.`}
+                title={`${THEME_META[theme].label} — click to cycle, right-click for menu`}
+                whileHover={{ rotate: 15 }}
+                transition={{ duration: 0.3 }}
+              >
+                {(() => { const Icon = themeIcon[theme]; return <Icon className="h-4 w-4" />; })()}
+              </motion.button>
+              <button
+                onClick={() => setThemeMenuOpen((o) => !o)}
+                className="absolute inset-0 md:hidden"
+                aria-label="Open theme menu"
+              />
+              <AnimatePresence>
+                {themeMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute right-0 mt-2 w-56 backdrop-blur-xl bg-card/95 border border-border/60 rounded-xl shadow-xl overflow-hidden z-50"
+                  >
+                    {THEME_ORDER.map((t) => {
+                      const Icon = themeIcon[t];
+                      const active = t === theme;
+                      return (
+                        <button
+                          key={t}
+                          onClick={() => { setTheme(t); setThemeMenuOpen(false); }}
+                          className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 transition-colors ${
+                            active ? "bg-primary/15 text-primary" : "text-foreground hover:bg-secondary/60"
+                          }`}
+                        >
+                          <Icon className="h-4 w-4" />
+                          <div className="flex flex-col">
+                            <span className="font-medium">{THEME_META[t].label}</span>
+                            <span className="text-[11px] text-muted-foreground">{THEME_META[t].tagline}</span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
           </div>
 
           <button
@@ -145,12 +186,13 @@ const Navigation = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.05 }}
-                onClick={toggleTheme}
+                onClick={cycleTheme}
                 className="w-full text-left px-5 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors flex items-center gap-2"
               >
-                {theme === "cyan" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                {theme === "cyan" ? "Light Mode" : "Dark Mode"}
+                {(() => { const Icon = themeIcon[theme]; return <Icon className="h-4 w-4" />; })()}
+                Theme: {THEME_META[theme].label}
               </motion.button>
+
             </motion.div>
           )}
         </AnimatePresence>
