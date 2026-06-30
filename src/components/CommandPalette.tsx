@@ -176,12 +176,5 @@ const CommandPalette = () => {
 
 export default CommandPalette;
 
-            </CommandList>
-          </Command>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-};
 
 export default CommandPalette;
