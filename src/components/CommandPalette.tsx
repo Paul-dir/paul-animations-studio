@@ -175,6 +175,3 @@ const CommandPalette = () => {
 };
 
 export default CommandPalette;
-
-
-export default CommandPalette;
