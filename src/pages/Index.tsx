@@ -40,6 +40,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <VisitorJourney />
       <CursorFollower />
       <CommandPalette />
       <AskPawlosAI />
