@@ -6,6 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import CursorFollower from "@/components/CursorFollower";
 import CommandPalette from "@/components/CommandPalette";
 import AskPawlosAI from "@/components/AskPawlosAI";
+import VisitorJourney from "@/components/VisitorJourney";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Eager imports for desktop (preserves previous behavior)
@@ -39,6 +40,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <VisitorJourney />
       <CursorFollower />
       <CommandPalette />
       <AskPawlosAI />
