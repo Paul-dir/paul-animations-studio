@@ -429,6 +429,11 @@ All colors MUST be HSL.
     to { transform: rotate(360deg); }
   }
 
+  @keyframes orbit-reverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+  }
+
   .animate-twinkle {
     animation: twinkle 2.5s ease-in-out infinite;
   }
