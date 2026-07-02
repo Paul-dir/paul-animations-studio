@@ -270,6 +270,8 @@ const Projects = () => {
           </Button>
         </motion.div>
       </div>
+
+      <ProjectCaseStudy open={open} onOpenChange={setOpen} caseStudy={active} />
     </section>
   );
 };
