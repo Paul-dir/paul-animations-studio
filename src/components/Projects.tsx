@@ -76,6 +76,15 @@ type Category = (typeof CATEGORIES)[number];
 
 const Projects = () => {
   const [filter, setFilter] = useState<Category>("All");
+  const [active, setActive] = useState<CaseStudy | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const openCase = (title: string, link: string, repo?: string) => {
+    const cs = CASE_STUDIES[title];
+    if (!cs) return;
+    setActive({ ...cs, link: cs.link ?? link, repo: cs.repo ?? repo });
+    setOpen(true);
+  };
 
   const filtered = useMemo(
     () => (filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === filter)),
