@@ -179,14 +179,20 @@ const Projects = () => {
                     </span>
                   )}
 
-                  <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 flex items-center justify-center gap-2 bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <button
+                      onClick={() => openCase(project.title, project.link, project.repo)}
+                      className="px-4 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                    >
+                      <BookOpen className="h-4 w-4" /> Case Study
+                    </button>
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                      className="px-4 py-2.5 rounded-full bg-background/90 border border-primary/40 text-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
                     >
-                      Live Preview <ExternalLink className="h-4 w-4" />
+                      Live <ExternalLink className="h-4 w-4" />
                     </a>
                   </div>
                 </div>
