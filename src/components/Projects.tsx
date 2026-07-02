@@ -214,14 +214,21 @@ const Projects = () => {
 
                   <div className="flex gap-2">
                     <Button
+                      size="sm"
+                      className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground group/btn"
+                      onClick={() => openCase(project.title, project.link, project.repo)}
+                    >
+                      <BookOpen className="mr-2 h-3.5 w-3.5" />
+                      Case Study
+                    </Button>
+                    <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1 border-border hover:border-primary hover:bg-primary/10 group/btn"
+                      className="border-border hover:border-primary hover:bg-primary/10 group/btn"
                       asChild
                     >
                       <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} live`}>
-                        Live
-                        <ExternalLink className="ml-2 h-3.5 w-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                        <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     </Button>
                     {project.repo && (
