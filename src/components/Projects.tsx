@@ -1,7 +1,9 @@
-import { ExternalLink, Github, Star } from "lucide-react";
+import { ExternalLink, Github, Star, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ProjectCaseStudy from "./ProjectCaseStudy";
+import { CASE_STUDIES, type CaseStudy } from "@/data/projectCaseStudies";
 
 type Project = {
   title: string;
@@ -74,6 +76,15 @@ type Category = (typeof CATEGORIES)[number];
 
 const Projects = () => {
   const [filter, setFilter] = useState<Category>("All");
+  const [active, setActive] = useState<CaseStudy | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const openCase = (title: string, link: string, repo?: string) => {
+    const cs = CASE_STUDIES[title];
+    if (!cs) return;
+    setActive({ ...cs, link: cs.link ?? link, repo: cs.repo ?? repo });
+    setOpen(true);
+  };
 
   const filtered = useMemo(
     () => (filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === filter)),
@@ -168,14 +179,20 @@ const Projects = () => {
                     </span>
                   )}
 
-                  <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 flex items-center justify-center gap-2 bg-background/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <button
+                      onClick={() => openCase(project.title, project.link, project.repo)}
+                      className="px-4 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                    >
+                      <BookOpen className="h-4 w-4" /> Case Study
+                    </button>
                     <a
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                      className="px-4 py-2.5 rounded-full bg-background/90 border border-primary/40 text-foreground font-semibold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
                     >
-                      Live Preview <ExternalLink className="h-4 w-4" />
+                      Live <ExternalLink className="h-4 w-4" />
                     </a>
                   </div>
                 </div>
@@ -197,14 +214,21 @@ const Projects = () => {
 
                   <div className="flex gap-2">
                     <Button
+                      size="sm"
+                      className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground group/btn"
+                      onClick={() => openCase(project.title, project.link, project.repo)}
+                    >
+                      <BookOpen className="mr-2 h-3.5 w-3.5" />
+                      Case Study
+                    </Button>
+                    <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1 border-border hover:border-primary hover:bg-primary/10 group/btn"
+                      className="border-border hover:border-primary hover:bg-primary/10 group/btn"
                       asChild
                     >
                       <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} live`}>
-                        Live
-                        <ExternalLink className="ml-2 h-3.5 w-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                        <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     </Button>
                     {project.repo && (
@@ -246,6 +270,8 @@ const Projects = () => {
           </Button>
         </motion.div>
       </div>
+
+      <ProjectCaseStudy open={open} onOpenChange={setOpen} caseStudy={active} />
     </section>
   );
 };
