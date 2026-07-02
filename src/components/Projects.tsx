@@ -1,7 +1,9 @@
-import { ExternalLink, Github, Star } from "lucide-react";
+import { ExternalLink, Github, Star, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ProjectCaseStudy from "./ProjectCaseStudy";
+import { CASE_STUDIES, type CaseStudy } from "@/data/projectCaseStudies";
 
 type Project = {
   title: string;
