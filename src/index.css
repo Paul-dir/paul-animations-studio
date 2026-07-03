@@ -510,3 +510,40 @@ All colors MUST be HSL.
     transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
+
+/* ===== Easter Egg Modes ===== */
+html.cyber-mode {
+  filter: hue-rotate(200deg) saturate(1.6) contrast(1.15);
+}
+html.cyber-mode body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    hsl(180 100% 50% / 0.04) 0px,
+    hsl(180 100% 50% / 0.04) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 9998;
+  mix-blend-mode: screen;
+}
+html.matrix-mode {
+  --primary: 140 100% 50%;
+  --accent: 140 100% 45%;
+}
+html.matrix-mode body {
+  background: #000 !important;
+  color: #00ff66;
+}
+html.matrix-mode body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(hsl(140 100% 50% / 0.15) 1px, transparent 1px);
+  background-size: 3px 3px;
+  z-index: 9998;
+}

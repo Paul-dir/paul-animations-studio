@@ -7,6 +7,10 @@ import CursorFollower from "@/components/CursorFollower";
 import CommandPalette from "@/components/CommandPalette";
 import AskPawlosAI from "@/components/AskPawlosAI";
 import VisitorJourney from "@/components/VisitorJourney";
+import FloatingNotifications from "@/components/FloatingNotifications";
+import EasterEggs from "@/components/EasterEggs";
+import CodeAndAchievements from "@/components/CodeAndAchievements";
+import DownloadCenter from "@/components/DownloadCenter";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Eager imports for desktop (preserves previous behavior)
@@ -46,6 +50,8 @@ const Index = () => {
       <CursorFollower />
       <CommandPalette />
       <AskPawlosAI />
+      <FloatingNotifications />
+      <EasterEggs />
       <ScrollProgress />
       <SciFiBackground />
       <Navigation />
@@ -56,9 +62,11 @@ const Index = () => {
           <StatsLazy />
           <SkillsLazy />
           <LiveTerminalLazy />
+          <CodeAndAchievements />
           <ExperienceLazy />
           <ServicesLazy />
           <ProjectsLazy />
+          <DownloadCenter />
           <ContactLazy />
           <FooterLazy />
         </Suspense>
@@ -68,9 +76,11 @@ const Index = () => {
           <Stats />
           <Skills />
           <LiveTerminal />
+          <CodeAndAchievements />
           <Experience />
           <Services />
           <Projects />
+          <DownloadCenter />
           <Contact />
           <Footer />
         </>
