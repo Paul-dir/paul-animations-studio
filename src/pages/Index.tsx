@@ -55,6 +55,7 @@ const Index = () => {
           <AboutLazy />
           <StatsLazy />
           <SkillsLazy />
+          <LiveTerminalLazy />
           <ExperienceLazy />
           <ServicesLazy />
           <ProjectsLazy />
@@ -66,6 +67,7 @@ const Index = () => {
           <About />
           <Stats />
           <Skills />
+          <LiveTerminal />
           <Experience />
           <Services />
           <Projects />
