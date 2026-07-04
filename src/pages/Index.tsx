@@ -67,6 +67,7 @@ const Index = () => {
           <ExperienceLazy />
           <ServicesLazy />
           <ProjectsLazy />
+          <SystemsPlayground />
           <DownloadCenter />
           <ContactLazy />
           <FooterLazy />
@@ -81,6 +82,7 @@ const Index = () => {
           <Experience />
           <Services />
           <Projects />
+          <SystemsPlayground />
           <DownloadCenter />
           <Contact />
           <Footer />
