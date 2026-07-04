@@ -547,3 +547,32 @@ html.matrix-mode body::after {
   background-size: 3px 3px;
   z-index: 9998;
 }
+
+/* ============ Developer Mode ============ */
+html.dev-mode body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+.dev-only { display: none; }
+html.dev-mode .dev-only { display: block; }
+html.dev-mode [data-dev-tag]::after {
+  content: attr(data-dev-tag);
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid hsl(var(--primary) / 0.4);
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.65rem;
+  color: hsl(var(--primary));
+  background: hsl(var(--primary) / 0.08);
+  vertical-align: middle;
+}
