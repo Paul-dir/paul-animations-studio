@@ -11,6 +11,7 @@ import FloatingNotifications from "@/components/FloatingNotifications";
 import EasterEggs from "@/components/EasterEggs";
 import CodeAndAchievements from "@/components/CodeAndAchievements";
 import DownloadCenter from "@/components/DownloadCenter";
+import SystemsPlayground from "@/components/SystemsPlayground";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Eager imports for desktop (preserves previous behavior)
@@ -66,6 +67,7 @@ const Index = () => {
           <ExperienceLazy />
           <ServicesLazy />
           <ProjectsLazy />
+          <SystemsPlayground />
           <DownloadCenter />
           <ContactLazy />
           <FooterLazy />
@@ -80,6 +82,7 @@ const Index = () => {
           <Experience />
           <Services />
           <Projects />
+          <SystemsPlayground />
           <DownloadCenter />
           <Contact />
           <Footer />
