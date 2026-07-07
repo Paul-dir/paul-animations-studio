@@ -68,6 +68,7 @@ const Index = () => {
           <ExperienceLazy />
           <ServicesLazy />
           <ProjectsLazy />
+          <EngineeringChallenges />
           <SystemsPlayground />
           <DownloadCenter />
           <ContactLazy />
