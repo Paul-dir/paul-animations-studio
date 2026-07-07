@@ -83,6 +83,7 @@ const Index = () => {
           <Experience />
           <Services />
           <Projects />
+          <EngineeringChallenges />
           <SystemsPlayground />
           <DownloadCenter />
           <Contact />
