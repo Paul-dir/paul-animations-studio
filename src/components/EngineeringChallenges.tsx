@@ -100,8 +100,9 @@ const Arrow = () => (
   </div>
 );
 
-const ChallengeCard = ({ c, i }: { c: Challenge; i: number }) => {
+const ChallengeCard = ({ c, i, onOpenImage }: { c: Challenge; i: number; onOpenImage: (c: Challenge) => void }) => {
   const [hover, setHover] = useState(false);
+  const [showImage, setShowImage] = useState(false);
   const Icon = c.icon;
 
   return (
@@ -181,11 +182,55 @@ const ChallengeCard = ({ c, i }: { c: Challenge; i: number }) => {
           </span>
         ))}
       </div>
+
+      {/* Image reveal toggle */}
+      <button
+        type="button"
+        onClick={() => setShowImage((s) => !s)}
+        className="mt-4 w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-primary/30 bg-primary/5 hover:bg-primary/10 hover:border-primary/60 text-primary text-xs font-mono uppercase tracking-wider transition-colors relative z-10"
+        aria-expanded={showImage}
+      >
+        <ImageIcon className="h-3.5 w-3.5" />
+        {showImage ? "Hide Visual" : "View Visual"}
+      </button>
+
+      <AnimatePresence initial={false}>
+        {showImage && (
+          <motion.div
+            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+            animate={{ height: "auto", opacity: 1, marginTop: 12 }}
+            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="overflow-hidden relative z-10"
+          >
+            <button
+              type="button"
+              onClick={() => onOpenImage(c)}
+              className="block w-full rounded-lg overflow-hidden border border-primary/30 group/img relative"
+              aria-label={`Open ${c.imageAlt} full size`}
+            >
+              <img
+                src={c.image}
+                alt={c.imageAlt}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-40 object-cover transition-transform duration-700 group-hover/img:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+              <span className="absolute bottom-2 left-2 text-[10px] font-mono text-foreground/90 bg-background/60 backdrop-blur-sm px-2 py-1 rounded">
+                Click to enlarge
+              </span>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.article>
   );
 };
 
 const EngineeringChallenges = () => {
+  const [lightbox, setLightbox] = useState<Challenge | null>(null);
+
   return (
     <section id="challenges" className="py-24 px-4 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -207,17 +252,61 @@ const EngineeringChallenges = () => {
             Engineering <span className="gradient-text">Challenges</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Real problems, real trade-offs, measurable outcomes — how I think through tough systems work.
+            Real problems, real trade-offs, measurable outcomes — tap "View Visual" on any card to see it.
           </p>
           <div className="section-divider" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CHALLENGES.map((c, i) => (
-            <ChallengeCard key={c.challenge} c={c} i={i} />
+            <ChallengeCard key={c.challenge} c={c} i={i} onOpenImage={setLightbox} />
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-background/90 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setLightbox(null)}
+            role="dialog"
+            aria-modal="true"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="relative max-w-5xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setLightbox(null)}
+                className="absolute -top-3 -right-3 z-10 p-2 rounded-full bg-primary text-primary-foreground shadow-lg hover:scale-110 transition-transform"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+              <div className="rounded-2xl overflow-hidden border border-primary/40 glass-card">
+                <img
+                  src={lightbox.image}
+                  alt={lightbox.imageAlt}
+                  className="w-full max-h-[75vh] object-contain bg-black/40"
+                />
+                <div className="p-4 border-t border-border/50">
+                  <p className="text-xs font-mono text-primary/80 uppercase tracking-widest">{lightbox.challenge}</p>
+                  <p className="text-sm text-foreground/90 mt-1">{lightbox.imageAlt}</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
