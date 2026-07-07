@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { Users, AlertTriangle, Lightbulb, TrendingUp, Database, Zap, Shield, Layers } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Users, AlertTriangle, Lightbulb, TrendingUp, Database, Zap, Shield, Layers, ImageIcon, X } from "lucide-react";
 import { useState } from "react";
 
 type Challenge = {
@@ -10,6 +10,8 @@ type Challenge = {
   result: string;
   resultDetail: string;
   tags: string[];
+  image: string;
+  imageAlt: string;
 };
 
 const CHALLENGES: Challenge[] = [
@@ -21,6 +23,8 @@ const CHALLENGES: Challenge[] = [
     result: "87% Faster",
     resultDetail: "4.2s → 540ms p95",
     tags: ["PostgreSQL", "Redis", "Indexing"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&auto=format&fit=crop",
+    imageAlt: "Query performance dashboard",
   },
   {
     icon: Database,
@@ -30,6 +34,8 @@ const CHALLENGES: Challenge[] = [
     result: "12x Throughput",
     resultDetail: "Batch job: 6h → 30min",
     tags: ["Partitioning", "SQL", "ETL"],
+    image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&auto=format&fit=crop",
+    imageAlt: "Data pipeline visualization",
   },
   {
     icon: Zap,
@@ -39,6 +45,8 @@ const CHALLENGES: Challenge[] = [
     result: "3x Capacity",
     resultDetail: "200 → 600 rps per node",
     tags: ["Node.js", "Pooling", "Profiling"],
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&auto=format&fit=crop",
+    imageAlt: "API server monitoring",
   },
   {
     icon: Shield,
@@ -48,6 +56,8 @@ const CHALLENGES: Challenge[] = [
     result: "0s Downtime",
     resultDetail: "Across 8 major releases",
     tags: ["Migrations", "CI/CD", "Postgres"],
+    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=900&auto=format&fit=crop",
+    imageAlt: "CI/CD deployment pipeline",
   },
   {
     icon: Layers,
@@ -57,6 +67,8 @@ const CHALLENGES: Challenge[] = [
     result: "5x Deploy Speed",
     resultDetail: "Weekly → daily releases",
     tags: ["Architecture", "Events", "Testing"],
+    image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=900&auto=format&fit=crop",
+    imageAlt: "Microservices architecture diagram",
   },
   {
     icon: TrendingUp,
@@ -66,6 +78,8 @@ const CHALLENGES: Challenge[] = [
     result: "-72% Payload",
     resultDetail: "Battery drain cut in half",
     tags: ["WebSockets", "Realtime", "Mobile"],
+    image: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=900&auto=format&fit=crop",
+    imageAlt: "Realtime network traffic",
   },
 ];
 
