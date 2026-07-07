@@ -12,6 +12,7 @@ import EasterEggs from "@/components/EasterEggs";
 import CodeAndAchievements from "@/components/CodeAndAchievements";
 import DownloadCenter from "@/components/DownloadCenter";
 import SystemsPlayground from "@/components/SystemsPlayground";
+import EngineeringChallenges from "@/components/EngineeringChallenges";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Eager imports for desktop (preserves previous behavior)
