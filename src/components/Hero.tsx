@@ -11,6 +11,18 @@ const ROLES = [
   "UI/UX Enthusiast",
 ];
 
+const MOTES = [
+  { left: "8%", bottom: "12%", size: "3px", duration: "14s", delay: "0s" },
+  { left: "22%", bottom: "5%", size: "2px", duration: "18s", delay: "2s" },
+  { left: "35%", bottom: "18%", size: "4px", duration: "16s", delay: "4s" },
+  { left: "48%", bottom: "8%", size: "2px", duration: "20s", delay: "1s" },
+  { left: "61%", bottom: "15%", size: "3px", duration: "15s", delay: "3s" },
+  { left: "74%", bottom: "6%", size: "2px", duration: "19s", delay: "5s" },
+  { left: "86%", bottom: "20%", size: "3px", duration: "17s", delay: "6s" },
+  { left: "93%", bottom: "10%", size: "2px", duration: "21s", delay: "2.5s" },
+];
+
+
 const Hero = () => {
   const [visible, setVisible] = useState(false);
   const tiltRef = useRef<HTMLDivElement>(null);
