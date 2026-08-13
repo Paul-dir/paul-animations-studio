@@ -102,6 +102,28 @@ const Hero = () => {
     };
   }, []);
 
+  // Cursor spotlight position (CSS vars, no re-renders)
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+        el.style.setProperty("--my", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+      });
+    };
+    el.addEventListener("mousemove", onMove);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
