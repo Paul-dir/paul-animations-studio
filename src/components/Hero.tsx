@@ -217,7 +217,7 @@ const Hero = () => {
 
             <motion.h1 {...fadeUp(0.3)} className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4">
               <span className="text-foreground">Pawlos </span>
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="text-gradient-flow">
                 Diriba
               </span>
             </motion.h1>
