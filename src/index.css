@@ -509,7 +509,103 @@ All colors MUST be HSL.
     box-shadow: 0 0 12px hsl(var(--primary) / 0.5);
     transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
+
+  /* ===== Hero visual polish ===== */
+
+  /* Animated gradient text (shifts hue-stops over time) */
+  .text-gradient-flow {
+    background-image: linear-gradient(
+      100deg,
+      hsl(var(--primary)),
+      hsl(var(--accent)),
+      hsl(var(--primary-glow, var(--primary))),
+      hsl(var(--primary))
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientFlow 8s ease-in-out infinite;
+  }
+  @keyframes gradientFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Faint perspective grid that fades toward the horizon */
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--primary) / 0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.10) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, hsl(0 0% 0%) 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, hsl(0 0% 0%) 0%, transparent 75%);
+  }
+
+  /* Slow diagonal aurora sweep */
+  .hero-aurora {
+    background: linear-gradient(
+      115deg,
+      transparent 35%,
+      hsl(var(--primary) / 0.10) 48%,
+      hsl(var(--accent) / 0.08) 55%,
+      transparent 68%
+    );
+    background-size: 260% 260%;
+    animation: auroraSweep 18s ease-in-out infinite;
+  }
+  @keyframes auroraSweep {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+  }
+
+  /* Cursor spotlight driven by --mx / --my */
+  .hero-spotlight {
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 40%),
+      hsl(var(--primary) / 0.12),
+      transparent 70%
+    );
+    transition: background 220ms ease-out;
+  }
+
+  /* Thin scan line drifting down the hero */
+  .hero-scan {
+    background: linear-gradient(to bottom, transparent, hsl(var(--primary) / 0.35), transparent);
+    height: 2px;
+    animation: heroScan 9s linear infinite;
+  }
+  @keyframes heroScan {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+
+  /* Soft drifting motes */
+  .mote {
+    position: absolute;
+    border-radius: 999px;
+    background: hsl(var(--primary));
+    animation: moteDrift linear infinite;
+  }
+  @keyframes moteDrift {
+    0% { transform: translate3d(0, 0, 0) scale(0.6); opacity: 0; }
+    15% { opacity: 0.7; }
+    85% { opacity: 0.5; }
+    100% { transform: translate3d(24px, -160px, 0) scale(1.1); opacity: 0; }
+  }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient-flow,
+  .hero-aurora,
+  .hero-scan,
+  .mote {
+    animation: none !important;
+  }
+}
+
 
 /* ===== Easter Egg Modes ===== */
 html.cyber-mode {

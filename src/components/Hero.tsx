@@ -11,6 +11,18 @@ const ROLES = [
   "UI/UX Enthusiast",
 ];
 
+const MOTES = [
+  { left: "8%", bottom: "12%", size: "3px", duration: "14s", delay: "0s" },
+  { left: "22%", bottom: "5%", size: "2px", duration: "18s", delay: "2s" },
+  { left: "35%", bottom: "18%", size: "4px", duration: "16s", delay: "4s" },
+  { left: "48%", bottom: "8%", size: "2px", duration: "20s", delay: "1s" },
+  { left: "61%", bottom: "15%", size: "3px", duration: "15s", delay: "3s" },
+  { left: "74%", bottom: "6%", size: "2px", duration: "19s", delay: "5s" },
+  { left: "86%", bottom: "20%", size: "3px", duration: "17s", delay: "6s" },
+  { left: "93%", bottom: "10%", size: "2px", duration: "21s", delay: "2.5s" },
+];
+
+
 const Hero = () => {
   const [visible, setVisible] = useState(false);
   const tiltRef = useRef<HTMLDivElement>(null);
@@ -90,6 +102,28 @@ const Hero = () => {
     };
   }, []);
 
+  // Cursor spotlight position (CSS vars, no re-renders)
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+        el.style.setProperty("--my", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+      });
+    };
+    el.addEventListener("mousemove", onMove);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -114,9 +148,17 @@ const Hero = () => {
       id="home"
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
+      {/* Cursor spotlight (outside parallax so it tracks 1:1) */}
+      <div className="absolute inset-0 hero-spotlight pointer-events-none" />
+
       {/* Animated background elements with parallax */}
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+
+        {/* Perspective grid + aurora sweep */}
+        <div className="absolute inset-0 hero-grid opacity-60" />
+        <div className="absolute inset-0 hero-aurora" />
+
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full mix-blend-screen filter blur-3xl animate-glow" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl animate-glow" style={{ animationDelay: "1.5s" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full animate-morph filter blur-[100px]" />
@@ -127,10 +169,34 @@ const Hero = () => {
         <div className="absolute bottom-32 left-[20%] w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-50" style={{ animationDelay: "2s" }} />
         <div className="absolute top-[60%] right-[10%] w-1 h-1 bg-primary rounded-full animate-float opacity-70" style={{ animationDelay: "3s" }} />
 
+        {/* Rising motes */}
+        {MOTES.map((m, i) => (
+          <span
+            key={i}
+            className="mote"
+            style={{
+              left: m.left,
+              bottom: m.bottom,
+              width: m.size,
+              height: m.size,
+              animationDuration: m.duration,
+              animationDelay: m.delay,
+              opacity: 0.5,
+            }}
+          />
+        ))}
+
         {/* Extra aurora streaks */}
         <div className="absolute top-0 left-1/3 w-[500px] h-[300px] bg-gradient-to-b from-primary/8 via-transparent to-transparent rounded-full blur-[120px] rotate-12" />
         <div className="absolute bottom-0 right-1/3 w-[400px] h-[200px] bg-gradient-to-t from-accent/6 via-transparent to-transparent rounded-full blur-[100px] -rotate-12" />
+
+        {/* Drifting scan line */}
+        <div className="absolute top-0 left-0 right-0 hero-scan" />
+
+        {/* Bottom fade into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </motion.div>
+
 
       <motion.div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10" style={{ y: textY }}>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
@@ -151,7 +217,7 @@ const Hero = () => {
 
             <motion.h1 {...fadeUp(0.3)} className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4">
               <span className="text-foreground">Pawlos </span>
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="text-gradient-flow">
                 Diriba
               </span>
             </motion.h1>
