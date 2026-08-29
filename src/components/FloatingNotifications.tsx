@@ -30,7 +30,7 @@ const FloatingNotifications = () => {
   const { icon: Icon, text, tint } = MESSAGES[current];
 
   return (
-    <div className="fixed top-24 right-4 z-40 max-w-xs animate-fade-in">
+    <div className="fixed bottom-24 right-3 left-3 md:left-auto md:bottom-auto md:top-24 md:right-4 z-40 md:max-w-xs animate-fade-in">
       <div className="glass-card border border-primary/30 rounded-xl p-3 pr-9 shadow-2xl flex items-center gap-3 relative">
         <div className="relative">
           <Bell className={`w-5 h-5 ${tint}`} />
