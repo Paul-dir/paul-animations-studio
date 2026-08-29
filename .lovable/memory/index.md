@@ -15,3 +15,4 @@ Themes: cyan (default dark), light, golden, purple — each maps to its own 3D p
 - [Garage123 Link](mem://projects/garage123-link) — Production URL for Garage123 project
 - [Branding Constraints](mem://constraints/branding-preference) — Hide Lovable branding to maintain professional credibility
 - [Experience Timeline](mem://features/experience-timeline) — Timeline with glowing markers, custom caps, INSA/Haramaya details
+Mobile (<768px): tone down animations/3D and keep text readable (solid-ish cards, scrim, fewer particles).
