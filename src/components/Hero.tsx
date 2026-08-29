@@ -160,14 +160,14 @@ const Hero = () => {
         <div className="absolute inset-0 hero-aurora" />
 
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full mix-blend-screen filter blur-3xl animate-glow" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl animate-glow" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full animate-morph filter blur-[100px]" />
+        <div className="hidden md:block absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl animate-glow" style={{ animationDelay: "1.5s" }} />
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full animate-morph filter blur-[100px]" />
 
         {/* Floating particles */}
-        <div className="absolute top-20 left-[10%] w-1 h-1 bg-primary rounded-full animate-float opacity-60" />
-        <div className="absolute top-40 right-[15%] w-2 h-2 bg-primary rounded-full animate-float opacity-40" style={{ animationDelay: "1s" }} />
-        <div className="absolute bottom-32 left-[20%] w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-50" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-[60%] right-[10%] w-1 h-1 bg-primary rounded-full animate-float opacity-70" style={{ animationDelay: "3s" }} />
+        <div className="hidden md:block absolute top-20 left-[10%] w-1 h-1 bg-primary rounded-full animate-float opacity-60" />
+        <div className="hidden md:block absolute top-40 right-[15%] w-2 h-2 bg-primary rounded-full animate-float opacity-40" style={{ animationDelay: "1s" }} />
+        <div className="hidden md:block absolute bottom-32 left-[20%] w-1.5 h-1.5 bg-primary rounded-full animate-float opacity-50" style={{ animationDelay: "2s" }} />
+        <div className="hidden md:block absolute top-[60%] right-[10%] w-1 h-1 bg-primary rounded-full animate-float opacity-70" style={{ animationDelay: "3s" }} />
 
         {/* Rising motes */}
         {MOTES.map((m, i) => (
