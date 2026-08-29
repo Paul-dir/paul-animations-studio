@@ -606,6 +606,34 @@ All colors MUST be HSL.
   }
 }
 
+/* ===== Mobile clarity: quieter effects so content stays readable ===== */
+@media (max-width: 767px) {
+  /* Cards get a real surface instead of near-transparent glass */
+  .glass-card {
+    @apply bg-card/70 border-border/70;
+  }
+
+  /* Grain is much lighter on small screens */
+  body::before { opacity: 0.08 !important; }
+  [data-theme="light"] body::before { opacity: 0.18 !important; }
+
+  /* Decorative hero layers dialed back / disabled */
+  .hero-grid { opacity: 0.25 !important; }
+  .hero-aurora { opacity: 0.4; }
+  .hero-scan,
+  .mote { display: none !important; }
+  .hero-spotlight { background: none !important; }
+
+  /* Heavy blur/glow costs a lot on phones */
+  .animate-glow { animation-duration: 6s; filter: blur(40px) !important; }
+  .animated-border::before { animation: none; }
+
+  /* Softer text glow so type stays crisp */
+  .glow-effect {
+    box-shadow: 0 0 16px hsl(var(--primary) / 0.18);
+  }
+}
+
 
 /* ===== Easter Egg Modes ===== */
 html.cyber-mode {
