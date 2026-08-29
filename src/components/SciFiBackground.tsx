@@ -13,9 +13,8 @@ const themePalette = {
 } as const;
 
 // Floating particle field
-const Particles = ({ color, opacity = 0.7, size = 0.04 }: { color: string; opacity?: number; size?: number }) => {
+const Particles = ({ color, opacity = 0.7, size = 0.04, count = 1500 }: { color: string; opacity?: number; size?: number; count?: number }) => {
   const ref = useRef<THREE.Points>(null);
-  const count = 1500;
 
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
