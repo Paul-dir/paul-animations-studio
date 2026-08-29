@@ -18,6 +18,16 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    title: "Audit Planning System",
+    description: "An enterprise audit planning platform for scheduling engagements, assigning audit teams, tracking findings and generating compliance reports.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
+    link: "https://audit-planning-system.vercel.app/",
+    repo: "https://github.com/Paul-dir",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop",
+    category: "Full Stack",
+    featured: true,
+  },
+  {
     title: "Task Manager",
     description: "A comprehensive task management application with user-friendly interface for organizing and tracking daily tasks efficiently.",
     tech: ["React", "Next.js", "Tailwind CSS"],

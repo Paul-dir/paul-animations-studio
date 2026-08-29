@@ -14,6 +14,52 @@ export type CaseStudy = {
 };
 
 export const CASE_STUDIES: Record<string, CaseStudy> = {
+  "Audit Planning System": {
+    title: "Audit Planning System",
+    tagline: "Plan, assign and track audit engagements from one compliance workspace.",
+    screenshots: [
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1400&auto=format&fit=crop",
+    ],
+    tech: ["React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Vercel"],
+    architecture: [
+      "React + TypeScript SPA deployed on Vercel",
+      "Postgres schema for engagements, auditors, risks and findings",
+      "Row Level Security so each team only sees its own engagements",
+      "Role-based dashboards for planners, auditors and reviewers",
+    ],
+    features: [
+      "Annual audit plan builder with timeline view",
+      "Risk scoring to prioritise which units get audited",
+      "Team assignment with workload and availability checks",
+      "Findings register with severity, owner and due date",
+      "Exportable compliance and status reports",
+    ],
+    challenges: [
+      "Modeling a flexible risk-scoring formula without hardcoding weights",
+      "Preventing double-booking auditors across overlapping engagements",
+      "Keeping large plan tables fast and readable on small screens",
+    ],
+    contribution: [
+      "Designed the data model and access rules",
+      "Built the planning UI, risk matrix and findings workflow",
+      "Implemented reporting and export pipeline",
+      "Shipped and maintained the production deployment",
+    ],
+    timeline: [
+      { phase: "Discovery", detail: "Mapped the real audit lifecycle with stakeholders" },
+      { phase: "Data model", detail: "Engagements, risks, auditors, findings" },
+      { phase: "Build", detail: "Planning board, assignments, findings register" },
+      { phase: "Launch", detail: "Live on Vercel with role-based access" },
+    ],
+    lessons: [
+      "Domain modeling first saves weeks of UI rework",
+      "Auditors care most about clarity, not visual flourish",
+      "Row-level security beats app-level permission checks",
+    ],
+    link: "https://audit-planning-system.vercel.app/",
+  },
   "Task Manager": {
     title: "Task Manager",
     tagline: "A modern task management platform for teams and individuals.",
