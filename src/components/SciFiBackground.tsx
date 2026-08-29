@@ -123,39 +123,65 @@ const Grid = ({ color, opacity = 0.18 }: { color: string; opacity?: number }) =>
 };
 
 // Scene composition
-const Scene = () => {
+const Scene = ({ isMobile }: { isMobile: boolean }) => {
   const { theme } = useTheme();
   const palette = themePalette[theme as keyof typeof themePalette] || themePalette.cyan;
   const isLight = theme === "light";
+  // Softer on phones so foreground text stays readable
+  const o = (v: number) => (isMobile ? v * 0.55 : v);
 
   return (
     <>
       <ambientLight intensity={isLight ? 0.8 : 0.5} />
-      <Particles color={palette.primary} opacity={isLight ? 0.9 : 0.7} size={isLight ? 0.05 : 0.04} />
-      <WireIcosahedron color={palette.primary} position={[-4, 2, -2]} opacity={isLight ? 0.75 : 0.5} />
-      <WireIcosahedron color={palette.accent} position={[5, -1, -3]} opacity={isLight ? 0.75 : 0.5} />
-      <WireTorus color={palette.secondary} position={[3, 3, -4]} opacity={isLight ? 0.7 : 0.45} />
-      <WireTorus color={palette.primary} position={[-5, -2, -1]} opacity={isLight ? 0.7 : 0.45} />
-      <GlowOrb color={palette.accent} position={[0, 0, -2]} intensity={isLight ? 1.6 : 1} />
-      <GlowOrb color={palette.secondary} position={[-2, 4, -5]} intensity={isLight ? 1.6 : 1} />
-      <GlowOrb color={palette.primary} position={[4, -3, -3]} intensity={isLight ? 1.6 : 1} />
-      <Grid color={palette.primary} opacity={isLight ? 0.35 : 0.18} />
+      <Particles
+        color={palette.primary}
+        opacity={o(isLight ? 0.9 : 0.7)}
+        size={isLight ? 0.05 : 0.04}
+        count={isMobile ? 450 : 1500}
+      />
+      <WireIcosahedron color={palette.primary} position={[-4, 2, -2]} opacity={o(isLight ? 0.75 : 0.5)} />
+      <WireTorus color={palette.secondary} position={[3, 3, -4]} opacity={o(isLight ? 0.7 : 0.45)} />
+      {!isMobile && (
+        <>
+          <WireIcosahedron color={palette.accent} position={[5, -1, -3]} opacity={isLight ? 0.75 : 0.5} />
+          <WireTorus color={palette.primary} position={[-5, -2, -1]} opacity={isLight ? 0.7 : 0.45} />
+          <GlowOrb color={palette.secondary} position={[-2, 4, -5]} intensity={isLight ? 1.6 : 1} />
+          <GlowOrb color={palette.primary} position={[4, -3, -3]} intensity={isLight ? 1.6 : 1} />
+        </>
+      )}
+      <GlowOrb color={palette.accent} position={[0, 0, -2]} intensity={isMobile ? 0.6 : isLight ? 1.6 : 1} />
+      <Grid color={palette.primary} opacity={o(isLight ? 0.35 : 0.18)} />
     </>
   );
 };
 
 const SciFiBackground = () => {
+  const isMobile = useIsMobile();
+  const reduceMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-0">
+    <div
+      className="fixed inset-0 pointer-events-none z-0 opacity-45 md:opacity-100"
+      aria-hidden="true"
+    >
       <Canvas
         camera={{ position: [0, 0, 8], fov: 65 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        dpr={isMobile ? 1 : [1, 1.5]}
+        frameloop={reduceMotion ? "demand" : "always"}
+        gl={{
+          antialias: !isMobile,
+          alpha: true,
+          powerPreference: isMobile ? "low-power" : "high-performance",
+        }}
       >
         <Suspense fallback={null}>
-          <Scene />
+          <Scene isMobile={isMobile} />
         </Suspense>
       </Canvas>
+      {/* Readability scrim on small screens */}
+      <div className="absolute inset-0 bg-background/45 md:hidden" />
     </div>
   );
 };
