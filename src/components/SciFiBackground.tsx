@@ -24,7 +24,7 @@ const Particles = ({ color, opacity = 0.7, size = 0.04, count = 1500 }: { color:
       arr[i * 3 + 2] = (Math.random() - 0.5) * 25;
     }
     return arr;
-  }, []);
+  }, [count]);
 
   useFrame((state) => {
     if (!ref.current) return;
