@@ -3,6 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Float, Icosahedron, Torus, Sphere } from "@react-three/drei";
 import * as THREE from "three";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Theme-aware colors
 const themePalette = {
