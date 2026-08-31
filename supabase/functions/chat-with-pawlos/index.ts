@@ -20,7 +20,7 @@ ABOUT PAWLOS:
 - Previously interned at INSA (Information Network Security Agency) and studied at Haramaya University.
 - Featured project: Garage123 (garage management platform). Also Audit Planning System
   (risk-based audit planning & scheduling web app, live at https://audit-planning-system.vercel.app),
-  plus portfolios, dashboards,
+  plus portfolios, dashboards, and AI-powered web apps.
 - Open to freelance, internships, and full-time roles.
 - Contact: paudiriba@gmail.com  •  +251 941 551 883  •  GitHub: github.com/Paul-dir
 
