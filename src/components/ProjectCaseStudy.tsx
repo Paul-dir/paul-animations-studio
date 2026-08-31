@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Dialog,
@@ -20,8 +21,10 @@ import {
   Clock,
   Lightbulb,
   Cpu,
+  BookOpen,
 } from "lucide-react";
 import type { CaseStudy } from "@/data/projectCaseStudies";
+import { projectPath } from "@/data/projectSlug";
 
 type Props = {
   open: boolean;
@@ -184,8 +187,13 @@ const ProjectCaseStudy = ({ open, onOpenChange, caseStudy }: Props) => {
 
             {/* Action buttons */}
             <div className="flex flex-wrap gap-2 mb-6">
+              <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
+                <Link to={projectPath(caseStudy.title)} onClick={() => onOpenChange(false)}>
+                  <BookOpen className="mr-2 h-4 w-4" /> Read full case study
+                </Link>
+              </Button>
               {caseStudy.link && (
-                <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
+                <Button asChild size="sm" variant="outline">
                   <a href={caseStudy.link} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
                   </a>

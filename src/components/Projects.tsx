@@ -1,9 +1,11 @@
-import { ExternalLink, Github, Star, BookOpen } from "lucide-react";
+import { ExternalLink, Github, Star, BookOpen, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCaseStudy from "./ProjectCaseStudy";
 import { CASE_STUDIES, type CaseStudy } from "@/data/projectCaseStudies";
+import { projectPath } from "@/data/projectSlug";
 
 type Project = {
   title: string;
@@ -231,6 +233,18 @@ const Projects = () => {
                       <BookOpen className="mr-2 h-3.5 w-3.5" />
                       Case Study
                     </Button>
+                    {CASE_STUDIES[project.title] && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-border hover:border-primary hover:bg-primary/10"
+                        asChild
+                      >
+                        <Link to={projectPath(project.title)} aria-label={`Read ${project.title} details page`}>
+                          <FileText className="h-3.5 w-3.5" />
+                        </Link>
+                      </Button>
+                    )}
                     <Button
                       variant="outline"
                       size="sm"

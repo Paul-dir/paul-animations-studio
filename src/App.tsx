@@ -8,6 +8,7 @@ import { DeveloperModeProvider } from "@/contexts/DeveloperModeContext";
 import DeveloperModeToggle from "@/components/DeveloperModeToggle";
 import DeveloperPanel from "@/components/DeveloperPanel";
 import Index from "./pages/Index";
+import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/projects/:slug" element={<ProjectDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <DeveloperModeToggle />
