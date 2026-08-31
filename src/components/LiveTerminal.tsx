@@ -32,9 +32,11 @@ Database  : PostgreSQL, MySQL, MongoDB
 Tools     : Git, Docker, Supabase, Figma`;
 
 const PROJECTS = `1. Garage123 — Auto service platform (React + Node)
-2. Tax Management System — Enterprise Java/Spring
-3. Portfolio AI — This site + Ask Pawlos AI
-4. Atlas — Internal tooling suite
+2. Audit Planning System — Risk-based audit planning app
+   → https://audit-planning-system.vercel.app
+3. Tax Management System — Enterprise Java/Spring
+4. Portfolio AI — This site + Ask Pawlos AI
+5. Atlas — Internal tooling suite
    → Type 'goto projects' to scroll to section`;
 
 const EXPERIENCE = `2023 – Present  Software Engineer @ INSA
