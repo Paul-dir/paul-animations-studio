@@ -63,7 +63,7 @@ const experiences = [
     title: "Software Engineering Student",
     company: "Haramaya University",
     location: "Ethiopia",
-    startDate: "2021-09-01",
+    startDate: "2022-09-01",
     endDate: null,
     description: "Pursuing Bachelor's degree in Software Engineering with focus on full‑stack development.",
     achievements: [
