@@ -23,7 +23,7 @@ const experiences = [
     company: "Information Network Security Administration (INSA)",
     location: "Ethiopia",
     startDate: "2026-02-01",
-    endDate: null,
+    endDate: "2026-09-30",
     description: "Working as a software development intern, contributing to real-world projects and systems while improving skills in web development.",
     achievements: [
       "Contributing to real-world projects and systems",
@@ -37,8 +37,8 @@ const experiences = [
     title: "Backend Engineering Intern",
     company: "Atlas Computer Technology",
     location: "Ethiopia",
-    startDate: "2025-10-01",
-    endDate: null,
+    startDate: "2026-04-01",
+    endDate: "2026-08-31",
     description: "Building enterprise backend services and microservices architecture for Atlas software products, working with Java/Spring Boot ecosystems and event-driven systems.",
     achievements: [
       "Developed microservices using Spring Boot & PostgreSQL, improving system modularity and maintainability",
