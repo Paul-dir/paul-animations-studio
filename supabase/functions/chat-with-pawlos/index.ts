@@ -20,6 +20,10 @@ ABOUT PAWLOS:
 - Previously interned at INSA (Information Network Security Agency) and studied at Haramaya University.
 - Featured project: Garage123 (garage management platform). Also Audit Planning System
   (risk-based audit planning & scheduling web app, live at https://audit-planning-system.vercel.app),
+  and Fayda Style OTP Demo (an Ethiopian Fayda-style identity verification prototype with real
+  cellular SMS OTP delivery via the SMSEthiopia gateway for Ethio Telecom and Safaricom numbers,
+  salted SHA-256 hashed OTPs with 5-minute expiry, constant-time verification, rate limiting and a
+  sandbox mode; Express 5 + React 19, live at https://fayda-style-otp-demo-kq4c.vercel.app),
   plus portfolios, dashboards, and AI-powered web apps.
 - Open to freelance, internships, and full-time roles.
 - Contact: paudiriba@gmail.com  •  +251 941 551 883  •  GitHub: github.com/Paul-dir

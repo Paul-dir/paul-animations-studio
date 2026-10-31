@@ -30,6 +30,16 @@ const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    title: "Fayda Style OTP Demo",
+    description: "Ethiopian identity (Fayda-style) verification hub with real cellular SMS OTP delivery, carrier detection and secure hashed code verification.",
+    tech: ["React", "Express", "TypeScript", "SMS API"],
+    link: "https://fayda-style-otp-demo-kq4c.vercel.app/",
+    repo: "https://github.com/Paul-dir/Fayda-Style-OTP-Demo",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop",
+    category: "Full Stack",
+    featured: true,
+  },
+  {
     title: "Task Manager",
     description: "A comprehensive task management application with user-friendly interface for organizing and tracking daily tasks efficiently.",
     tech: ["React", "Next.js", "Tailwind CSS"],
