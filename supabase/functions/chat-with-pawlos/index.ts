@@ -20,6 +20,11 @@ ABOUT PAWLOS:
 - Previously interned at INSA (Information Network Security Agency) and studied at Haramaya University.
 - Featured project: Garage123 (garage management platform). Also Audit Planning System
   (risk-based audit planning & scheduling web app, live at https://audit-planning-system.vercel.app),
+  ITAS Audit System (Integrated Tax Administration System tax-audit module for Ethiopia's Ministry
+  of Revenue — Java 21 + Spring Boot 3.2 backend with 41 Flyway migrations, Keycloak security and a
+  React 19 back-office UI covering annual plan routing, committee review and five audit types:
+  Desk, Comprehensive, Transfer Pricing, Issue and Joint; live at https://itas-audit-system.vercel.app,
+  source at https://github.com/Paul-dir/itas-audit-system),
   and Fayda Style OTP Demo (an Ethiopian Fayda-style identity verification prototype with real
   cellular SMS OTP delivery via the SMSEthiopia gateway for Ethio Telecom and Safaricom numbers,
   salted SHA-256 hashed OTPs with 5-minute expiry, constant-time verification, rate limiting and a

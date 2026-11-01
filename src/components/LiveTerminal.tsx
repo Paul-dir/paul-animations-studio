@@ -36,7 +36,8 @@ const PROJECTS = `1. Garage123 — Auto service platform (React + Node)
    → https://audit-planning-system.vercel.app
 3. Fayda Style OTP Demo — Identity verification + real SMS OTP
    → https://fayda-style-otp-demo-kq4c.vercel.app
-4. Tax Management System — Enterprise Java/Spring
+4. ITAS Audit System — Ministry of Revenue tax-audit platform
+   → https://itas-audit-system.vercel.app
 5. Portfolio AI — This site + Ask Pawlos AI
 6. Atlas — Internal tooling suite
    → Type 'goto projects' to scroll to section`;
