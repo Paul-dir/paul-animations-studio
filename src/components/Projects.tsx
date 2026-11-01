@@ -40,6 +40,16 @@ const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    title: "ITAS Audit System",
+    description: "Integrated Tax Administration System tax-audit module for Ethiopia's Ministry of Revenue: annual planning, committee review and five audit execution types.",
+    tech: ["Java 21", "Spring Boot", "PostgreSQL", "React 19", "Keycloak"],
+    link: "https://itas-audit-system.vercel.app/",
+    repo: "https://github.com/Paul-dir/itas-audit-system",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&auto=format&fit=crop",
+    category: "Full Stack",
+    featured: true,
+  },
+  {
     title: "Task Manager",
     description: "A comprehensive task management application with user-friendly interface for organizing and tracking daily tasks efficiently.",
     tech: ["React", "Next.js", "Tailwind CSS"],

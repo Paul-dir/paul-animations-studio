@@ -308,6 +308,7 @@ const AskPawlosAI = () => {
                       "Tell me about Garage123",
                       "What is the Audit Planning System?",
                       "What is the Fayda Style OTP Demo?",
+                      "What is the ITAS Audit System?",
                       "Are you available for work?",
                     ].map((q) => (
                       <button
