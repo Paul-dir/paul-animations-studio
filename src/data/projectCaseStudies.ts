@@ -1,3 +1,5 @@
+import resumeAnalyzerAsset from "@/assets/ai-resume-analyzer.png.asset.json";
+
 export type CaseStudy = {
   title: string;
   tagline: string;
@@ -14,6 +16,47 @@ export type CaseStudy = {
 };
 
 export const CASE_STUDIES: Record<string, CaseStudy> = {
+  "AI Resume Analyzer": {
+    title: "AI Resume Analyzer",
+    tagline: "Resumind — job-specific resume feedback with actionable ATS insights.",
+    screenshots: [resumeAnalyzerAsset.url],
+    tech: ["React 19", "TypeScript", "React Router 7", "Vite 7", "Tailwind CSS 4", "Puter.js", "PDF.js"],
+    architecture: [
+      "React Router application with home, authentication, upload and resume-detail views",
+      "Browser-side PDF processing with PDF.js to create resume previews",
+      "Puter integration for sign-in, file uploads and key-value storage",
+      "AI client supports Anthropic, Gemini and local Ollama configurations, with sample feedback fallback",
+    ],
+    features: [
+      "PDF resume upload with drag-and-drop and document preview",
+      "Company, job title and job description inputs for tailored analysis",
+      "Score breakdown for ATS fit, tone and style, content, structure and skills",
+      "Detailed feedback with suggested improvements for each category",
+      "Resume dashboard and sample analyses to preview the review experience",
+    ],
+    challenges: [
+      "Turning PDF resumes into readable previews directly in the browser",
+      "Presenting structured AI feedback as clear scores and actionable suggestions",
+      "Handling provider failures while distinguishing sample feedback from live analysis",
+    ],
+    contribution: [
+      "Project source available in my Paul-dir/ai-resume-analyzer repository",
+      "Live Resumind demo published on Vercel",
+    ],
+    timeline: [
+      { phase: "Upload", detail: "Sign in and submit a PDF resume with target job details" },
+      { phase: "Preview", detail: "Convert the PDF into a visual resume preview" },
+      { phase: "Analyze", detail: "Prepare job-specific instructions and request structured feedback" },
+      { phase: "Review", detail: "Explore scores, feedback categories and improvement suggestions" },
+    ],
+    lessons: [
+      "A job description gives resume feedback useful context",
+      "Category-level scores make a review easier to scan than a single overall score",
+      "AI feedback is guidance, not a guarantee of ATS acceptance or hiring outcomes",
+    ],
+    link: "https://ai-resume-analyzer-teal-mu.vercel.app/",
+    repo: "https://github.com/Paul-dir/ai-resume-analyzer",
+  },
   "Audit Planning System": {
     title: "Audit Planning System",
     tagline: "Plan, assign and track audit engagements from one compliance workspace.",

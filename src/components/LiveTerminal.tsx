@@ -38,8 +38,10 @@ const PROJECTS = `1. Garage123 — Auto service platform (React + Node)
    → https://fayda-style-otp-demo-kq4c.vercel.app
 4. ITAS Audit System — Ministry of Revenue tax-audit platform
    → https://itas-audit-system.vercel.app
-5. Portfolio AI — This site + Ask Pawlos AI
-6. Atlas — Internal tooling suite
+5. AI Resume Analyzer — Resumind PDF reviews + job-specific ATS insights
+   → https://ai-resume-analyzer-teal-mu.vercel.app/
+6. Portfolio AI — This site + Ask Pawlos AI
+7. Atlas — Internal tooling suite
    → Type 'goto projects' to scroll to section`;
 
 const EXPERIENCE = `2023 – Present  Software Engineer @ INSA
