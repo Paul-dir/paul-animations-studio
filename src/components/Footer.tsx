@@ -1,5 +1,6 @@
 import { Github, Mail, Phone, Heart, ArrowUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -38,6 +39,7 @@ const Footer = () => {
           >
             <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-4">Quick Links</h4>
             <div className="flex flex-wrap gap-3 justify-center">
+              <Link to="/portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors">Portfolio</Link>
               {links.map((link) => (
                 <button
                   key={link.id}

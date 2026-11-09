@@ -207,6 +207,9 @@ const Projects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
+          <Button asChild className="mr-3 mb-3 px-8 py-6 text-lg">
+            <Link to="/portfolio"><BookOpen className="mr-2 h-5 w-5" />Browse Portfolio</Link>
+          </Button>
           <Button
             variant="outline"
             className="border-2 border-primary/40 hover:border-primary hover:bg-primary/10 px-8 py-6 text-lg group"

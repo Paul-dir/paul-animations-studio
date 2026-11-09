@@ -103,7 +103,7 @@ const ProjectDetail = () => {
 
           <div className="relative container mx-auto max-w-5xl px-4 pt-10 pb-12">
             <Link
-              to="/#projects"
+              to="/portfolio"
               className="inline-flex items-center gap-2 text-sm text-foreground/75 hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="h-4 w-4" /> Back to projects
