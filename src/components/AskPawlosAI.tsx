@@ -309,6 +309,7 @@ const AskPawlosAI = () => {
                       "What is the Audit Planning System?",
                       "What is the Fayda Style OTP Demo?",
                       "What is the ITAS Audit System?",
+                      "What is the AI Resume Analyzer?",
                       "Are you available for work?",
                     ].map((q) => (
                       <button

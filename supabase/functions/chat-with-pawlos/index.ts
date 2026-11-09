@@ -29,7 +29,15 @@ ABOUT PAWLOS:
   cellular SMS OTP delivery via the SMSEthiopia gateway for Ethio Telecom and Safaricom numbers,
   salted SHA-256 hashed OTPs with 5-minute expiry, constant-time verification, rate limiting and a
   sandbox mode; Express 5 + React 19, live at https://fayda-style-otp-demo-kq4c.vercel.app),
-  plus portfolios, dashboards, and AI-powered web apps.
+   AI Resume Analyzer (Resumind — PDF resume reviews tailored to job descriptions, with scores
+   and suggestions for ATS fit, tone/style, content, structure and skills; React 19, TypeScript,
+   React Router 7, Vite 7, Tailwind CSS 4, PDF.js and Puter integration for auth/files/storage;
+   AI client supports Anthropic, Gemini and local Ollama configurations with sample fallback;
+   live at https://ai-resume-analyzer-teal-mu.vercel.app/,
+   source at https://github.com/Paul-dir/ai-resume-analyzer),
+   plus portfolios, dashboards, and AI-powered web apps.
+- Resume analyzer scores are guidance, not guarantees of ATS acceptance or hiring outcomes.
+  Sample analyses and fallback feedback must not be presented as verified live AI results.
 - Open to freelance, internships, and full-time roles.
 - Contact: paudiriba@gmail.com  •  +251 941 551 883  •  GitHub: github.com/Paul-dir
 

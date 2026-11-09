@@ -20,6 +20,16 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    title: "AI Resume Analyzer",
+    description: "Resumind reviews PDF resumes against target job descriptions, with ATS insights, category scores and actionable improvement suggestions.",
+    tech: ["React 19", "TypeScript", "React Router", "Puter.js", "PDF.js"],
+    link: "https://ai-resume-analyzer-teal-mu.vercel.app/",
+    repo: "https://github.com/Paul-dir/ai-resume-analyzer",
+    image: CASE_STUDIES["AI Resume Analyzer"].screenshots[0],
+    category: "Full Stack",
+    featured: true,
+  },
+  {
     title: "Audit Planning System",
     description: "An enterprise audit planning platform for scheduling engagements, assigning audit teams, tracking findings and generating compliance reports.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Supabase"],
